@@ -65,12 +65,43 @@
   <p>The <code>shrikeserver-</code> and <code>shrikeserver_</code> artifacts are the headless server build, for running without a desktop.</p>
 
   <h2>Verify the download</h2>
-  <p>Take <code>SHA256SUMS</code>, <code>SHA256SUMS.asc</code> and <code>privkeyio-signing-key.asc</code> from the same release, then:</p>
-<pre><code>gpg --import privkeyio-signing-key.asc
-gpg --verify SHA256SUMS.asc SHA256SUMS
-sha256sum --ignore-missing -c SHA256SUMS</code></pre>
-  <p>Releases are signed by Kyle Santiago &lt;kyle@privkey.io&gt;, key fingerprint:</p>
+  <p>There are two ways to do this. If you already have Shrike installed, it can check the download for you. Otherwise it is a few commands.</p>
+
+  <h3>If you already have Shrike</h3>
+  <p>Download <code>SHA256SUMS</code> and <code>SHA256SUMS.asc</code> from the release, then drag either one onto the Shrike window. The verify dialog opens and checks the file for you. You can also reach it from <strong>Tools &rarr; Verify Download</strong>.</p>
+  <p>This is the easiest route, and it works for a fresh download of a new version while your existing install stays untouched.</p>
+
+  <h3>From the command line</h3>
+  <p>You need <code>gpg</code>. It is preinstalled on most Linux systems; on macOS and Windows you will need to install GnuPG first.</p>
+  <p>Put three files in the same folder as the installer you downloaded, all from the same release: <code>privkeyio-signing-key.asc</code>, <code>SHA256SUMS</code> and <code>SHA256SUMS.asc</code>. Then open a terminal in that folder, for example <code>cd ~/Downloads</code>.</p>
+
+  <p><strong>Step 1. Import the signing key.</strong></p>
+<pre><code>gpg --import privkeyio-signing-key.asc</code></pre>
+
+  <p><strong>Step 2. Check the signature on the checksum file.</strong></p>
+<pre><code>gpg --verify SHA256SUMS.asc SHA256SUMS</code></pre>
+  <p>A successful check reports a good signature from the release key:</p>
+<pre><code>gpg: Signature made ...
+gpg:                using RSA key A47D99B6DB0D715D40C59A2023AE8A8EA7E24E38
+gpg: Good signature from "Kyle Santiago &lt;kyle@privkey.io&gt;" [unknown]</code></pre>
+
+  <div class="notice notice-accent">
+    <span class="notice-title">The warning underneath is normal</span>
+    <p>gpg will almost certainly add something like <em>WARNING: This key is not certified with a trusted signature</em>. That is not a failure. It only means you have not told your own gpg that you personally trust this key, which is true of any key you have just imported.</p>
+    <p>What matters is the line above it. <strong>Good signature</strong> means the file was signed by the holder of that key, and the fingerprint on the <code>using RSA key</code> line matches the one below. If you see <strong>BAD signature</strong> instead, stop and do not install anything.</p>
+  </div>
+
+  <p>The release key belongs to Kyle Santiago &lt;kyle@privkey.io&gt;. Compare the fingerprint yourself:</p>
 <pre><code>A47D 99B6 DB0D 715D 40C5  9A20 23AE 8A8E A7E2 4E38</code></pre>
+
+  <p><strong>Step 3. Check the installer against the checksums.</strong> Step 2 only proved the checksum file is genuine. It said nothing about the installer, so now compare the two. The command depends on your system.</p>
+  <p>Linux:</p>
+<pre><code>sha256sum --ignore-missing -c SHA256SUMS</code></pre>
+  <p>macOS:</p>
+<pre><code>shasum -a 256 --ignore-missing -c SHA256SUMS</code></pre>
+  <p>Windows, in PowerShell, then compare the result by eye against the matching line in <code>SHA256SUMS</code>:</p>
+<pre><code>Get-FileHash Shrike-&lt;version&gt;.msi -Algorithm SHA256</code></pre>
+  <p>On Linux and macOS you want to see your file named with <code>OK</code> after it. Anything reporting <code>FAILED</code> means the file does not match what was signed: delete it and download again.</p>
 
   <div class="notice notice-accent">
     <span class="notice-title">Unsigned installers</span>
