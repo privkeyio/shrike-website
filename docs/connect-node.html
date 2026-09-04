@@ -33,7 +33,7 @@
 <div class="wrap doc">
   <p class="kicker">Docs</p>
   <h1>Connecting a node or Electrum server</h1>
-  <p>Shrike ships with no public Electrum servers, because none of the public servers follow the BLAKE2b fork. You supply the backend.</p>
+  <p>Shrike ships with no public Electrum servers. The ones it inherited from upstream do not follow the BLAKE2b fork, and a server that has not adopted it indexes a chain you are not spending on. You supply the backend.</p>
   <div class="notice notice-accent">
     <span class="notice-title">Minimum node version</span>
     <p>Shrike is meant to be used with <a href="https://github.com/bitcoinknots/bitcoin/releases/tag/v29.4.1.knots20260508">Bitcoin Knots v29.4.1.knots20260508</a> or any later release. Earlier releases do not follow the fork, and an Electrum server is only as good as the node behind it.</p>
