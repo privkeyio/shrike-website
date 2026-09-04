@@ -33,7 +33,8 @@
 <div class="wrap doc">
   <p class="kicker">Download</p>
   <h1>Download Shrike</h1>
-  <p>Every release is published on GitHub with a <code>SHA256SUMS</code> file covering every artifact, signed with the release key. Verify before you run anything.</p>
+  <p>Every release is published on GitHub with a <code>SHA256SUMS</code> file covering every artifact, signed with the release key.</p>
+  <p>Verifying takes a minute and is worth it: it checks that the file you downloaded is exactly the file that was published, and not something altered in transit or served by a site pretending to be this one. A wallet is a bad thing to take on trust. Do it before you run anything.</p>
 
   <div class="notice">
     <span class="notice-title">Not audited</span>
@@ -79,6 +80,8 @@ sha256sum --ignore-missing -c SHA256SUMS</code></pre>
 
   <h2>What else you need</h2>
   <p>A node that follows the fork: <a href="https://github.com/bitcoinknots/bitcoin/releases/tag/v29.4.1.knots20260508">Bitcoin Knots v29.4.1.knots20260508</a> or any later release, connected directly or behind your own Electrum server. Shrike ships with no public servers, because the ones it inherited from upstream do not follow the fork. For an Electrum server, use a <a href="https://github.com/privkeyio/Fulcrum/releases/latest">Fulcrum build with BLAKE2b support</a> or the <a href="https://github.com/privkeyio/fulcrum-startos/releases/latest">StartOS package</a>; stock Fulcrum stops at the activation height. See <a href="/docs/connect-node.html">connecting a node</a>.</p>
+
+  <p>If you would rather follow along, Bitcoin University has a <a href="https://youtu.be/7-5XszJcD6g" rel="noreferrer">walkthrough of installing Shrike and pointing it at a node</a>, covering Start9 and Umbrel. It is a community recording made before the current release.</p>
 
   <h2>Installing next to Sparrow</h2>
   <p>Shrike uses its own home folder, packages, desktop entries and bundle identifier, so it installs alongside an existing Sparrow without sharing or overwriting any of its state. Wallet files are not shared between the two.</p>

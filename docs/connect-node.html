@@ -33,11 +33,15 @@
 <div class="wrap doc">
   <p class="kicker">Docs</p>
   <h1>Connecting a node or Electrum server</h1>
-  <p>Shrike ships with no public Electrum servers. The ones it inherited from upstream do not follow the BLAKE2b fork, and a server that has not adopted it indexes a chain you are not spending on. You supply the backend.</p>
+  <p>A wallet has to get its information from somewhere: which coins are yours, what has arrived, what fee to pay. Most wallets come with public servers already set up to answer that.</p>
+  <p>Shrike does not, and that is deliberate. The public ones are still following the old rules, so they would be answering about a different chain than the one you are spending on. Rather than ship defaults that look like they work and quietly mislead you, Shrike ships none and asks you to point it at something you trust.</p>
+  <p>There are two ways to do that, both below: connect it straight to your own Bitcoin Knots node, or run your own Electrum server in front of that node. Either way the node has to be a recent enough Knots.</p>
   <div class="notice notice-accent">
     <span class="notice-title">Minimum node version</span>
     <p>Shrike is meant to be used with <a href="https://github.com/bitcoinknots/bitcoin/releases/tag/v29.4.1.knots20260508">Bitcoin Knots v29.4.1.knots20260508</a> or any later release. Earlier releases do not follow the fork, and an Electrum server is only as good as the node behind it.</p>
   </div>
+
+  <p>Bitcoin University has a <a href="https://youtu.be/7-5XszJcD6g" rel="noreferrer">video walkthrough of setting this up</a>, covering Start9 and Umbrel and installing Shrike against them. It is a community recording made before the current release.</p>
 
   <h2>Why run your own</h2>
   <p>A server you connect to sees which addresses you ask about. That is enough to tie your balance, your transaction history and your future payments together, and to tie all of it to your IP address. Running the node yourself is what stops that from being someone else's record.</p>

@@ -33,8 +33,11 @@
 <div class="wrap doc">
   <p class="kicker">Docs</p>
   <h1>Replay protection with SIGHASH_UNIFIED</h1>
-  <p>A signature that does not opt in is valid under both rule sets, which means the transaction carrying it can be replayed against nodes still running the pre-fork rules. This page is about making sure yours opts in.</p>
-  <p>Replay is the one thing a hardfork of Bitcoin has to handle carefully. The chain, the coins and the history are unchanged; what changes at the activation height is the proof of work and the signature hash, and until your coins have moved under the new rules a transaction you sign can be valid on both sides of that height.</p>
+  <p>The fork left two sets of nodes running: the ones that took the upgrade, and the ones that did not. Both still recognise the coins you already had.</p>
+  <p>That creates one risk. If you sign a payment the old way, the very same payment can be copied across to the nodes that did not upgrade and spent there too. You meant to pay once, and you end up paying on both sides.</p>
+  <p>Shrike signs the new way by default, and the old nodes reject that signature. That is the whole protection, and it does not depend on anyone else cooperating.</p>
+  <p>So there are two things to do. <strong>Before you send, check the send screen says the transaction is protected.</strong> And <strong>if you were holding coins before the fork, send them to yourself once</strong>, because until you do, spending them can still be copied.</p>
+  <p>The rest of this page is the detail behind that.</p>
 
   <div class="toc">
     <ul>
@@ -49,6 +52,7 @@
   </div>
 
   <h2 id="how">How the opt-in works</h2>
+  <p>Replay is the one thing a hardfork of Bitcoin has to handle carefully. The chain, the coins and the history are unchanged; what changes at the activation height is the proof of work and the signature hash, and until your coins have moved under the new rules a transaction you sign can be valid on both sides of that height.</p>
   <p>Past the activation height Shrike signs with <code>SIGHASH_UNIFIED</code>, the name the fork uses for this opt-in. It is not a hash type of its own but a flag, <code>0x20</code>, set on the base type a signature already carries:</p>
   <div class="table-scroll">
     <table>

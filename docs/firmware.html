@@ -33,7 +33,10 @@
 <div class="wrap doc">
   <p class="kicker">Docs</p>
   <h1>Hardware wallet firmware</h1>
-  <p>Marking a keystore under <strong>Replay protection</strong> tells Shrike that its signer can produce <code>SIGHASH_UNIFIED</code>. That is a claim about the firmware on the device, and stock firmware from any manufacturer cannot do it yet.</p>
+  <p>A hardware wallet is what actually signs your transactions. For a signature to carry the new protection, the device has to know how to produce it, and no manufacturer ships firmware that does yet.</p>
+  <p>Unofficial builds exist for Coldcard, SeedSigner and Trezor, listed below. Flashing one is not a small decision, so read the warning first.</p>
+  <p>You may well not need to. An unmarked device still signs perfectly well, and in a multisig wallet one upgraded signer is enough to protect the whole transaction, so a single device can cover a wallet whose others stay on stock firmware.</p>
+  <p>In the wallet, ticking <strong>Replay protection</strong> on a keystore is how you tell Shrike that its device can sign the new way. Shrike cannot detect it, because nothing the device reports says which firmware it runs.</p>
 
   <div class="notice">
     <span class="notice-title">Read this before flashing anything</span>
