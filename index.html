@@ -35,7 +35,7 @@
     <div>
     <h1>Shrike Bitcoin Wallet</h1>
     <p class="lede">A full desktop Bitcoin wallet: hardware wallets, PSBT, multisig and airgapped signing, connecting to your own node. Shrike follows the <strong>BLAKE2b proof-of-work hardfork</strong> of Bitcoin.</p>
-    <p class="lede">It signs with <code>SIGHASH_UNIFIED</code>, so the transactions it builds cannot be replayed against nodes still running the pre-fork rules. The same coins, the same history, an upgrade to the proof of work.</p>
+    <p class="lede">It signs with <code>SIGHASH_UNIFIED</code>, so the transactions it builds cannot be replayed against nodes still running the pre-fork rules.</p>
     <div class="btn-row">
       <a class="btn" href="/download/">Download</a>
       <a class="btn btn-ghost" href="/docs/replay-protection.html">How replay protection works</a>
@@ -45,14 +45,6 @@
   </div>
 </div>
 
-<section>
-  <div class="wrap">
-    <div class="notice">
-      <span class="notice-title">Not audited</span>
-      <p>Shrike has not been audited. Use it at your own risk, with no warranty of any kind. It is an unofficial fork: upstream Sparrow has not adopted the BLAKE2b fork, and if that is what you want, use Sparrow instead.</p>
-    </div>
-  </div>
-</section>
 
 <section>
   <div class="wrap">
@@ -91,7 +83,7 @@
       </div>
       <div class="card">
         <h3>Only adopting services</h3>
-        <p class="muted">Fee rates, explorer links and broadcast go to mempool.guide. The preconfigured public Electrum servers are gone, because none of them follow the fork.</p>
+        <p class="muted">Fee rates, explorer links and broadcast go to <a href="https://mempool.guide">mempool.guide</a>. The preconfigured public Electrum servers are gone, because none of them follow the fork.</p>
       </div>
       <div class="card">
         <h3>Separate application identity</h3>
@@ -114,7 +106,7 @@
         <thead><tr><th>Network</th><th>Height</th><th>Activated</th></tr></thead>
         <tbody>
           <tr><td>mainnet</td><td><code>961,640</code></td><td>30 August 2026</td></tr>
-          <tr><td>testnet4</td><td><code>150,308</code></td><td>&mdash;</td></tr>
+          <tr><td>testnet4</td><td><code>150,308</code></td><td>30 August 2026</td></tr>
         </tbody>
       </table>
     </div>
@@ -149,7 +141,7 @@
 </main>
 <footer class="site-footer">
   <div class="wrap footer-grid">
-    <p class="footer-note">Shrike is an unofficial fork of Sparrow Bitcoin Wallet, licensed under the Apache 2.0 licence. It is not affiliated with or endorsed by the Sparrow project.</p>
+    <p class="footer-note">Shrike has not been audited and comes with no warranty of any kind. It is an unofficial fork of Sparrow Bitcoin Wallet, licensed under the Apache 2.0 licence, and is not affiliated with or endorsed by the Sparrow project.</p>
     <div class="footer-links">
       <a href="https://github.com/privkeyio/shrike">GitHub</a>
       <a href="https://github.com/privkeyio/shrike/releases/latest">Releases</a>

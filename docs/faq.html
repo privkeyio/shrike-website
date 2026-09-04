@@ -58,7 +58,7 @@
   <p>The fork carries temporary data storage limits alongside the proof-of-work change: roughly 300 kB serialized, about 800,000 weight units, from the activation height until 1 September 2027 at 00:00 UTC, after which nodes vote on them by median time past. Less space per block means more competition for it, so expect fee estimates to run higher than the pre-fork norm and size a transaction accordingly.</p>
 
   <h2>Why is only mempool.guide offered?</h2>
-  <p>It is the one fee, explorer and broadcast service that has adopted the fork. A fee estimate from a mempool you are not broadcasting into prices the transaction wrongly, and an explorer that stopped at the activation height shows a history that ends there, so the alternatives are removed rather than left in place to mislead.</p>
+  <p><a href="https://mempool.guide">mempool.guide</a> is the one fee, explorer and broadcast service that has adopted the fork. A fee estimate from a mempool you are not broadcasting into prices the transaction wrongly, and an explorer that stopped at the activation height shows a history that ends there, so the alternatives are removed rather than left in place to mislead.</p>
 
   <h2>Is a transaction replay protected if only one signer in my multisig is marked?</h2>
   <p>Only when that signer takes part. One marked signer in the quorum that actually forms is enough, which is why the wallet reports the result on the send screen per transaction instead of promising it in advance. Marking two of a 2-of-3 makes it unconditional.</p>
@@ -78,7 +78,7 @@
 </main>
 <footer class="site-footer">
   <div class="wrap footer-grid">
-    <p class="footer-note">Shrike is an unofficial fork of Sparrow Bitcoin Wallet, licensed under the Apache 2.0 licence. It is not affiliated with or endorsed by the Sparrow project.</p>
+    <p class="footer-note">Shrike has not been audited and comes with no warranty of any kind. It is an unofficial fork of Sparrow Bitcoin Wallet, licensed under the Apache 2.0 licence, and is not affiliated with or endorsed by the Sparrow project.</p>
     <div class="footer-links">
       <a href="https://github.com/privkeyio/shrike">GitHub</a>
       <a href="https://github.com/privkeyio/shrike/releases/latest">Releases</a>
