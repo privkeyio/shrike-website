@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>What Shrike changes: BLAKE2b and SIGHASH_UNIFIED | Shrike</title>
-<meta name="description" content="The six ways Shrike differs from upstream: BLAKE2b proof of work, SIGHASH_UNIFIED signing, per-keystore opt-in, and a separate application identity.">
+<meta name="description" content="How Shrike differs from upstream: BLAKE2b proof of work, SIGHASH_UNIFIED signing, per-keystore opt-in, and a separate application identity.">
 <meta name="color-scheme" content="dark">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Shrike">
 <meta property="og:title" content="What Shrike changes: BLAKE2b and SIGHASH_UNIFIED | Shrike">
-<meta property="og:description" content="The six ways Shrike differs from upstream: BLAKE2b proof of work, SIGHASH_UNIFIED signing, per-keystore opt-in, and a separate application identity.">
+<meta property="og:description" content="How Shrike differs from upstream: BLAKE2b proof of work, SIGHASH_UNIFIED signing, per-keystore opt-in, and a separate application identity.">
 <link rel="icon" href="/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="/assets/css/main.css">
@@ -32,12 +32,14 @@
 <main>
 <div class="wrap doc">
   <p class="kicker">Features</p>
-  <h1>What Shrike changes for the BLAKE2b hardfork</h1>
-  <p>Shrike is Sparrow with six changes. Everything not listed on this page behaves as upstream does, and upstream's documentation applies to it.</p>
+  <h1>What Shrike changes</h1>
+  <p>Shrike is Sparrow with the changes below carried on top. Anything not listed here behaves as upstream does, and upstream's documentation applies to it.</p>
   <p>All of it concerns one thing: the BLAKE2b hardfork is an upgrade to Bitcoin's proof of work, applied to the existing chain at a set height. It is not a new chain, and it does not create a separate coin. Shrike is a Bitcoin wallet holding Bitcoin, and the balances and history in it are the ones that were always there.</p>
 
   <h2>BLAKE2b proof of work</h2>
   <p>Past the activation height, Shrike validates the 164 byte v2 block header and takes its BLAKE2b hash as the block id. Before activation it validates the old header and the old hash, so one wallet syncs the whole chain from genesis across the boundary without a break. The implementation lives in the <a href="https://github.com/privkeyio/drongo">drongo</a> submodule, which is why the clone has to be recursive.</p>
+
+  <p>The fork itself is not this project's work. <a href="https://bitcoin-blake2b.org">bitcoin-blake2b.org</a> explains what changed and why, and the consensus change is specified in the <a href="https://github.com/bitcoinknots/bitcoin/blob/v29.4.1.knots20260508/doc/release-notes.md#attack-mitigation">Bitcoin Knots release notes</a>. Shrike is a wallet that follows it.</p>
 
   <h2>Unified opt-in signature hash</h2>
   <p>Past activation, Shrike signs with <code>SIGHASH_UNIFIED</code>. It is a flag, <code>0x20</code>, set on whatever base hash type the signature already uses: <code>0x21</code> for the default All, <code>0x22</code> for None, <code>0x23</code> for Single, and <code>0xA1</code> to <code>0xA3</code> for the Anyone Can Pay combinations. Under the pre-fork rules none of those are valid, so a signature carrying the flag cannot be replayed onto nodes still running them. This is the whole mechanism: the protection comes from the old rules rejecting the signature, not from anything the wallet asks the network to enforce.</p>
