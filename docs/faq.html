@@ -18,7 +18,7 @@
 <header class="site-header">
   <div class="wrap nav">
     <a class="brand" href="/">
-      <img class="brand-mark" src="/assets/images/shrike-head.png" alt="" width="34" height="34">
+      <img class="brand-mark" src="/assets/images/shrike-mark.png" alt="" width="34" height="34">
       Shrike
     </a>
     <nav class="nav-links">
@@ -49,7 +49,7 @@
 
   <h2>Does my hardware wallet work?</h2>
   <p>It signs either way. Whether it can produce the new hash type depends on its firmware, and nothing the device reports says which firmware it runs, so Shrike does not guess: you mark the keystore yourself under <strong>Replay protection</strong>. An unmarked device still signs, with the hash type it can produce, and the send screen reports what the transaction actually got.</p>
-  <p>Stock firmware cannot produce it yet. Unofficial builds exist for Coldcard, SeedSigner and Trezor Model One, and flashing one voids the manufacturer warranty; see <a href="/docs/firmware.html">hardware wallet firmware</a> before you consider it.</p>
+  <p>Stock firmware cannot produce it yet. Unofficial builds exist for Coldcard, SeedSigner and every current Trezor, and flashing one voids the manufacturer warranty; see <a href="/docs/firmware.html">hardware wallet firmware</a> before you consider it.</p>
 
   <h2>Why can I not pick a public Electrum server?</h2>
   <p>Because none of the public ones follow the fork. A server that did not take the upgrade stops at the activation height and carries on under the pre-fork rules, so it reports a history that ends there. Connect a Bitcoin Knots node at <a href="https://github.com/bitcoinknots/bitcoin/releases/tag/v29.4.1.knots20260508">v29.4.1.knots20260508</a> or later, or your own Electrum server indexing one. Stock Fulcrum will not work either, for the same reason; <a href="https://github.com/privkeyio/Fulcrum/releases/latest">builds with BLAKE2b support</a> are available. See <a href="/docs/connect-node.html">connecting a node</a>.</p>
