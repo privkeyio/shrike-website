@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Build Shrike from source and run it | Shrike</title>
+<meta name="description" content="Cloning recursively for the drongo submodule, Java 25 build requirements, running from source, command line options and the Shrike home folder.">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Shrike">
+<meta property="og:title" content="Build Shrike from source and run it | Shrike">
+<meta property="og:description" content="Cloning recursively for the drongo submodule, Java 25 build requirements, running from source, command line options and the Shrike home folder.">
+<link rel="icon" href="/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="/">
+      <img class="brand-mark" src="/assets/images/shrike-mark.png" alt="" width="34" height="34">
+      Shrike
+    </a>
+    <nav class="nav-links">
+      <a href="/features/">Features</a>
+      <a href="/download/">Download</a>
+      <a href="/docs/" aria-current="page">Docs</a>
+      <a href="https://github.com/privkeyio/shrike">Source</a>
+    </nav>
+  </div>
+</header>
+<main>
+<div class="wrap doc">
+  <p class="kicker">Docs</p>
+  <h1>Building and running Shrike</h1>
+  <p>Build requirements are unchanged from upstream. The one thing to get right is the recursive clone.</p>
+
+  <h2>Clone</h2>
+  <p>Clone this repository rather than upstream's, and <code>--recursive</code> matters: the BLAKE2b work lives in the drongo submodule, and a flat clone will not build.</p>
+<pre><code>git clone --recursive https://github.com/privkeyio/shrike.git</code></pre>
+  <p>When updating later:</p>
+<pre><code>git pull --recurse-submodules</code></pre>
+
+  <h2>Requirements</h2>
+  <p>Java 25 or higher. The release binaries are built with Eclipse Temurin 25.0.2+10; with <a href="https://sdkman.io/">SDKMAN</a>, <code>sdk env install</code> picks up the right version. On Debian and Ubuntu, packaging also needs:</p>
+<pre><code>sudo apt install -y rpm fakeroot binutils</code></pre>
+  <p>Building the Windows installer additionally needs WiX.</p>
+
+  <h2>Build</h2>
+<pre><code>./gradlew jpackage</code></pre>
+  <p>On distributions without <code>deb</code> or <code>rpm</code> tooling, such as Arch, skip the installers:</p>
+<pre><code>./gradlew jpackage -PskipInstallers=true</code></pre>
+
+  <h2>Running from source</h2>
+  <p>From the project directory, with Java 25 or higher installed:</p>
+<pre><code>./sparrow</code></pre>
+  <p>The convenience script in the source tree kept its upstream name, so it is <code>./sparrow</code> even here. The launcher inside a built or installed package is <code>shrike</code>.</p>
+  <p>Command line options:</p>
+<pre><code>--dir, -d        Path to the home folder
+--help, -h       Show usage
+--level, -l      Log level: ERROR, WARN, INFO, DEBUG, TRACE
+--network, -n    mainnet, testnet, testnet4, regtest or signet</code></pre>
+  <p>Note that <code>testnet</code> means testnet3.</p>
+
+  <h2>Home folder</h2>
+  <p>Unless <code>-d</code> says otherwise, Shrike keeps its config, log and wallets in <code>~/.shrike</code> on macOS and Linux, with the other networks in subfolders. It is a separate location from Sparrow's, so the two installations never share state. On macOS and Linux the XDG base directory specification is supported as an opt-in, resolved per category: where the corresponding directory already exists it is used, otherwise the home folder is. Passing <code>-d</code> disables XDG resolution entirely and puts everything in the folder you name.</p>
+
+  <h2>Reproducible builds</h2>
+  <p>The release binaries are reproducible, before codesigning and installer packaging. The procedure is kept with the code, in <a href="https://github.com/privkeyio/shrike/blob/master/docs/reproducible.md">docs/reproducible.md</a>, along with the two regtest walkthroughs that verify the proof of work and the signature hash against a live forked node.</p>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <p class="footer-note">Shrike is an unofficial fork of Sparrow Bitcoin Wallet, licensed under the Apache 2.0 licence. It is not affiliated with or endorsed by the Sparrow project.</p>
+    <div class="footer-links">
+      <a href="https://github.com/privkeyio/shrike">GitHub</a>
+      <a href="https://github.com/privkeyio/shrike/releases/latest">Releases</a>
+      <a href="https://github.com/privkeyio/shrike/issues">Issues</a>
+      <a href="/docs/">Docs</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

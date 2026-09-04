@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Replay protection and SIGHASH_UNIFIED | Shrike</title>
+<meta name="description" content="How SIGHASH_UNIFIED prevents replay on the BLAKE2b hardfork: the 0x20 flag, marking a keystore, multisig quorums, and the Anyone Can Pay exception.">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Shrike">
+<meta property="og:title" content="Replay protection and SIGHASH_UNIFIED | Shrike">
+<meta property="og:description" content="How SIGHASH_UNIFIED prevents replay on the BLAKE2b hardfork: the 0x20 flag, marking a keystore, multisig quorums, and the Anyone Can Pay exception.">
+<link rel="icon" href="/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="/">
+      <img class="brand-mark" src="/assets/images/shrike-mark.png" alt="" width="34" height="34">
+      Shrike
+    </a>
+    <nav class="nav-links">
+      <a href="/features/">Features</a>
+      <a href="/download/">Download</a>
+      <a href="/docs/" aria-current="page">Docs</a>
+      <a href="https://github.com/privkeyio/shrike">Source</a>
+    </nav>
+  </div>
+</header>
+<main>
+<div class="wrap doc">
+  <p class="kicker">Docs</p>
+  <h1>Replay protection with SIGHASH_UNIFIED</h1>
+  <p>A signature that does not opt in is valid under both rule sets, which means the transaction carrying it can be replayed against nodes still running the pre-fork rules. This page is about making sure yours opts in.</p>
+  <p>Replay is the one thing a hard fork of Bitcoin has to handle carefully. The chain, the coins and the history are unchanged; what changes at the activation height is the proof of work and the signature hash, and until your coins have moved under the new rules a transaction you sign can be valid on both sides of that height.</p>
+
+  <div class="toc">
+    <ul>
+      <li><a href="#how">How the opt-in works</a></li>
+      <li><a href="#send">Reading the send screen</a></li>
+      <li><a href="#keystore">Marking a keystore</a></li>
+      <li><a href="#multisig">Multisig quorums</a></li>
+      <li><a href="#acp">The Anyone Can Pay exception</a></li>
+      <li><a href="#sweep">Coins held across activation</a></li>
+    </ul>
+  </div>
+
+  <h2 id="how">How the opt-in works</h2>
+  <p>Past the activation height Shrike signs with <code>SIGHASH_UNIFIED</code>, the name the fork uses for this opt-in. It is not a hash type of its own but a flag, <code>0x20</code>, set on the base type a signature already carries:</p>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Base type</th><th>With the flag</th></tr></thead>
+      <tbody>
+        <tr><td>All (the default)</td><td><code>0x21</code></td></tr>
+        <tr><td>None</td><td><code>0x22</code></td></tr>
+        <tr><td>Single</td><td><code>0x23</code></td></tr>
+        <tr><td>All, None, Single, each + Anyone Can Pay</td><td><code>0xA1</code>, <code>0xA2</code>, <code>0xA3</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>None of those are valid under the pre-fork consensus rules, so a node running them rejects the signature outright. Nothing has to cooperate for this to hold: the protection is the old rules refusing the signature, not a policy anyone has to honor.</p>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Network</th><th>Activation height</th><th>Activated</th></tr></thead>
+      <tbody>
+        <tr><td>mainnet</td><td><code>961,640</code></td><td>30 August 2026</td></tr>
+        <tr><td>testnet4</td><td><code>150,308</code></td><td>&mdash;</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>The compiled-in height is cross checked against the connected node wherever the node reports one, and a disagreement makes Shrike decline to opt in rather than follow either number. Only Knots reports it, through <code>getdeploymentinfo</code>. Behind anything else the wallet still opts in, and tells you the height went unchecked.</p>
+
+  <h2 id="send">Reading the send screen</h2>
+  <p>The opt-in is selected by default, and the send screen reports what the transaction actually got. Check it before you build anything.</p>
+  <figure>
+    <img src="/assets/images/send-replay-protected.png" alt="The send screen reporting a transaction as replay protected">
+    <figcaption>What you want to see.</figcaption>
+  </figure>
+  <figure>
+    <img src="/assets/images/send-not-replay-protected.png" alt="The send screen reporting a transaction as not replay protected">
+    <figcaption>Where it reads this instead, hovering the status names what is refusing and what to do about it.</figcaption>
+  </figure>
+  <p>Where a signer is the reason, the fix is to mark it, below. Where the wallet cannot opt in at all, it signs the legacy way rather than failing, and says so.</p>
+
+  <h2 id="keystore">Marking a keystore</h2>
+  <p>Nothing a hardware device reports says which firmware it runs, and a watch-only keystore reports nothing about signing at all. So the wallet cannot detect the opt-in: you tell it. Open the wallet settings, go to the keystore tab, and tick <strong>Replay protection</strong> for each keystore whose signer you know produces the new hash type. It is off until you say so.</p>
+  <figure>
+    <img src="/assets/images/keystore-replay-protection.png" alt="The Replay protection field in the keystore tab, marked as supported by this device">
+    <figcaption>A keystore holding its own key needs no mark.</figcaption>
+  </figure>
+  <p>Stock firmware from any manufacturer cannot produce <code>SIGHASH_UNIFIED</code> yet. Where a device needs new firmware to be markable, see <a href="/docs/firmware.html">hardware wallet firmware</a> for the builds that exist and what flashing one costs you.</p>
+
+  <h2 id="multisig">Multisig quorums</h2>
+  <p>One marked signer is enough for the transaction to opt in, and unmarked signers still sign: each is handed the hash type it can actually produce.</p>
+  <p>What that means in practice depends on how many you mark. Mark two of a 2-of-3 and every transaction opts in, because any quorum that forms contains at least one of them. Mark one and it depends on that signer taking part, which is why the wallet reports the result per transaction on the send screen instead of promising anything in advance.</p>
+
+  <h2 id="acp">The Anyone Can Pay exception</h2>
+  <p>Anyone Can Pay commits only to its own input and to the outputs. The rest of the transaction is not covered, so that single input can be lifted out of it and spent against nodes that never adopted the fork, even though the transaction as a whole cannot be replayed. The send screen names signatures of this kind, and Shrike never selects the mode by itself.</p>
+
+  <h2 id="sweep">Coins held across activation</h2>
+  <p>Coins that existed before activation are the same coins either way: the fork does not duplicate them or issue anything new. What it does mean is that a spend of them is only bound to the upgraded rules once it carries an opted-in signature, and a spend covers only the inputs it consumes.</p>
+  <p>So sweep every pre-fork UTXO to yourself before transacting with anyone still on the old rules. Until you do, a transaction spending those coins stays valid under the pre-fork rules as well, and anyone holding a copy of it can submit it there.</p>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <p class="footer-note">Shrike is an unofficial fork of Sparrow Bitcoin Wallet, licensed under the Apache 2.0 licence. It is not affiliated with or endorsed by the Sparrow project.</p>
+    <div class="footer-links">
+      <a href="https://github.com/privkeyio/shrike">GitHub</a>
+      <a href="https://github.com/privkeyio/shrike/releases/latest">Releases</a>
+      <a href="https://github.com/privkeyio/shrike/issues">Issues</a>
+      <a href="/docs/">Docs</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

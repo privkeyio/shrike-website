@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bitcoin wallet for the BLAKE2b hardfork | Shrike</title>
+<meta name="description" content="Shrike is a desktop Bitcoin wallet following the BLAKE2b proof-of-work hardfork, signing with SIGHASH_UNIFIED so transactions cannot be replayed.">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Shrike">
+<meta property="og:title" content="Bitcoin wallet for the BLAKE2b hardfork | Shrike">
+<meta property="og:description" content="Shrike is a desktop Bitcoin wallet following the BLAKE2b proof-of-work hardfork, signing with SIGHASH_UNIFIED so transactions cannot be replayed.">
+<link rel="icon" href="/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="/">
+      <img class="brand-mark" src="/assets/images/shrike-mark.png" alt="" width="34" height="34">
+      Shrike
+    </a>
+    <nav class="nav-links">
+      <a href="/features/">Features</a>
+      <a href="/download/">Download</a>
+      <a href="/docs/">Docs</a>
+      <a href="https://github.com/privkeyio/shrike">Source</a>
+    </nav>
+  </div>
+</header>
+<main>
+<div class="hero">
+  <div class="wrap hero-grid">
+    <div>
+    <h1>Desktop Bitcoin wallet for the BLAKE2b hardfork</h1>
+    <p class="lede">Shrike follows the BLAKE2b proof-of-work hardfork of Bitcoin and signs with the <strong>unified opt-in signature hash</strong>, so the transactions it builds cannot be replayed against nodes still running the pre-fork rules.</p>
+    <p class="lede">This is a hard fork of Bitcoin, not a new chain and not a separate coin. Shrike is a Bitcoin wallet, holding the same coins with the same history, following an upgrade to the proof of work.</p>
+    <div class="btn-row">
+      <a class="btn" href="/download/">Download</a>
+      <a class="btn btn-ghost" href="/docs/replay-protection.html">How replay protection works</a>
+    </div>
+    </div>
+    <img class="hero-art" src="/assets/images/shrike-mark.png" alt="Shrike" width="640" height="639">
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="notice">
+      <span class="notice-title">Not audited</span>
+      <p>Shrike has not been audited. Use it at your own risk, with no warranty of any kind. It is an unofficial fork: upstream Sparrow has not adopted the BLAKE2b fork, and if that is what you want, use Sparrow instead.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>What Shrike changes</h2>
+    <p class="section-lede">Everything else is Sparrow: the same wallet model, the same hardware wallet support, the same PSBT workflow. These are the differences.</p>
+    <div class="grid">
+      <div class="card">
+        <h3>BLAKE2b proof of work</h3>
+        <p class="muted">Validates the 164 byte v2 block header and takes the BLAKE2b hash as the block id past activation. The work itself lives in the drongo submodule.</p>
+      </div>
+      <div class="card">
+        <h3>Unified opt-in signature hash</h3>
+        <p class="muted">Past activation, signs with <code>SIGHASH_UNIFIED</code>: the <code>0x20</code> flag set on the base hash type, <code>0x21</code> by default. The pre-fork rules reject that hash type, which is exactly what makes the signature unreplayable.</p>
+      </div>
+      <div class="card">
+        <h3>Per-keystore opt-in</h3>
+        <p class="muted">Nothing a hardware device or watch-only keystore reports tells the wallet what firmware will sign for it, so you mark each one by hand. One marked signer in a quorum is enough.</p>
+      </div>
+      <div class="card">
+        <h3>Only adopting services</h3>
+        <p class="muted">Fee rates, explorer links and broadcast go to mempool.guide. The preconfigured public Electrum servers are gone, because none of them follow the fork.</p>
+      </div>
+      <div class="card">
+        <h3>Separate application identity</h3>
+        <p class="muted">Installs alongside an existing Sparrow without sharing state: its own <code>~/.shrike</code> folder, packages, desktop entries, MIME types and macOS bundle identifier.</p>
+      </div>
+      <div class="card">
+        <h3>Verified end to end</h3>
+        <p class="muted">The proof of work and the signature hash are both checked against a live forked regtest node, not just unit tested. The release binaries are reproducible.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Activation</h2>
+    <p class="section-lede">Past these heights, Shrike validates BLAKE2b work and opts in when it signs.</p>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Network</th><th>Height</th><th>Activated</th></tr></thead>
+        <tbody>
+          <tr><td>mainnet</td><td><code>961,640</code></td><td>30 August 2026</td></tr>
+          <tr><td>testnet4</td><td><code>150,308</code></td><td>&mdash;</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Below these heights nothing changes: the same chain, the same coins, the same history. Past them, blocks carry BLAKE2b work and signatures opt in.</p>
+    <p>The compiled-in height is cross checked against the connected node wherever the node reports one. If the two disagree, Shrike declines to opt in rather than picking a side. Only Knots reports the height, through <code>getdeploymentinfo</code>; behind anything else the wallet still opts in and tells you the height went unchecked.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Check the send screen</h2>
+    <p class="section-lede">A signature that does not opt in is valid under both rule sets, so it can be replayed. Shrike selects the opt-in by default and says plainly what each transaction got.</p>
+    <figure>
+      <img src="/assets/images/send-replay-protected.png" alt="The send screen reporting a transaction as replay protected">
+      <figcaption>Where the status reads otherwise, hovering it names what is refusing and what to do about it.</figcaption>
+    </figure>
+    <p><strong>Anyone Can Pay is the exception.</strong> It commits only to its own input and the outputs, so that input can be lifted out and spent under the pre-fork rules even though the whole transaction cannot. Shrike names such signatures and never selects that mode on its own.</p>
+    <p><a href="/docs/replay-protection.html">Read the full replay protection guide &rarr;</a></p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Get started</h2>
+    <div class="grid">
+      <a class="card" href="/download/"><h3>Download</h3><p class="muted">Packages for Linux, macOS and Windows, with a signed <code>SHA256SUMS</code> covering every file.</p></a>
+      <a class="card" href="/docs/connect-node.html"><h3>Connect a node</h3><p class="muted">Point Shrike at Bitcoin Knots v29.4.1.knots20260508 or later, or your own Electrum server indexing one.</p></a>
+      <a class="card" href="/docs/building.html"><h3>Build from source</h3><p class="muted">Clone recursively, build with Gradle, or reproduce the published binaries.</p></a>
+    </div>
+  </div>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <p class="footer-note">Shrike is an unofficial fork of Sparrow Bitcoin Wallet, licensed under the Apache 2.0 licence. It is not affiliated with or endorsed by the Sparrow project.</p>
+    <div class="footer-links">
+      <a href="https://github.com/privkeyio/shrike">GitHub</a>
+      <a href="https://github.com/privkeyio/shrike/releases/latest">Releases</a>
+      <a href="https://github.com/privkeyio/shrike/issues">Issues</a>
+      <a href="/docs/">Docs</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

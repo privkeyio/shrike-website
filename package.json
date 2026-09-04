@@ -1,0 +1,10 @@
+{
+  "name": "shrike-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Website for Shrike, a Bitcoin wallet following the BLAKE2b fork",
+  "scripts": {
+    "serve": "npx serve .",
+    "start": "npx serve ."
+  }
+}

@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hardware wallet firmware for SIGHASH_UNIFIED | Shrike</title>
+<meta name="description" content="Unofficial Coldcard, SeedSigner and Trezor firmware builds that sign with SIGHASH_UNIFIED, how to verify them, and what flashing one costs you.">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Shrike">
+<meta property="og:title" content="Hardware wallet firmware for SIGHASH_UNIFIED | Shrike">
+<meta property="og:description" content="Unofficial Coldcard, SeedSigner and Trezor firmware builds that sign with SIGHASH_UNIFIED, how to verify them, and what flashing one costs you.">
+<link rel="icon" href="/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="/">
+      <img class="brand-mark" src="/assets/images/shrike-mark.png" alt="" width="34" height="34">
+      Shrike
+    </a>
+    <nav class="nav-links">
+      <a href="/features/">Features</a>
+      <a href="/download/">Download</a>
+      <a href="/docs/" aria-current="page">Docs</a>
+      <a href="https://github.com/privkeyio/shrike">Source</a>
+    </nav>
+  </div>
+</header>
+<main>
+<div class="wrap doc">
+  <p class="kicker">Docs</p>
+  <h1>Hardware wallet firmware</h1>
+  <p>Marking a keystore under <strong>Replay protection</strong> tells Shrike that its signer can produce <code>SIGHASH_UNIFIED</code>. That is a claim about the firmware on the device, and stock firmware from any manufacturer cannot do it yet.</p>
+
+  <div class="notice">
+    <span class="notice-title">Read this before flashing anything</span>
+    <p>These are unofficial, unaudited builds, and none of them are affiliated with or endorsed by the manufacturers. Flashing one replaces the software that holds your keys and signs your transactions.</p>
+    <p>It will void your manufacturer warranty. It can brick the device. A build that is wrong, or tampered with in transit, can sign away your coins. <strong>Back up your seed and verify it restores elsewhere before you start</strong>, and verify the signed <code>SHA256SUMS</code> against the release key before flashing rather than after.</p>
+    <p>Nobody has to flash anything. An unmarked device still signs, with the hash type it can produce, and the send screen reports exactly what the transaction got. Marking one signer in a multisig quorum is enough for the whole transaction to opt in, so a single upgraded device can cover a wallet whose other signers stay on stock firmware.</p>
+  </div>
+
+  <h2>Available builds</h2>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Device</th><th>Build</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Coldcard Mk4, Mk5, Q</td>
+          <td><a href="https://github.com/privkeyio/cc-firmware/releases/latest">cc-firmware</a></td>
+          <td>Mk4 and Mk5 take the <code>-mk-coldcard.dfu</code> file, Q takes <code>-q1-coldcard.dfu</code>.</td>
+        </tr>
+        <tr>
+          <td>SeedSigner</td>
+          <td><a href="https://github.com/privkeyio/seedsigner/releases/latest">seedsigner</a></td>
+          <td>Shows the signature hash type on screen, so you can confirm what it signed.</td>
+        </tr>
+        <tr>
+          <td>Trezor Model One</td>
+          <td><a href="https://github.com/privkeyio/trezor-firmware/releases/latest">trezor-firmware</a></td>
+          <td>Bitcoin-only, Model One only, and still a pre-release. No build for other Trezor models.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Earlier releases in these repositories have been withdrawn and superseded. Take the newest one rather than an older tag, and read its notes: they say what changed and whether an earlier build should be replaced.</p>
+
+  <h2>Verifying a build</h2>
+  <p>Each release carries a <code>SHA256SUMS</code> signed with the same key as the Shrike releases. Verify before flashing:</p>
+<pre><code>gpg --import privkeyio-signing-key.asc
+gpg --verify SHA256SUMS.asc SHA256SUMS
+sha256sum --ignore-missing -c SHA256SUMS</code></pre>
+  <p>Fingerprint <code>A47D 99B6 DB0D 715D 40C5  9A20 23AE 8A8E A7E2 4E38</code>, Kyle Santiago &lt;kyle@privkey.io&gt;. A signature that does not verify means you do not flash it.</p>
+
+  <h2>After flashing</h2>
+  <p>Nothing the device reports tells Shrike what firmware it is running, so the wallet still will not detect the change. Mark the keystore yourself in the wallet settings, then check the send screen on the next transaction to confirm it actually opted in. See <a href="/docs/replay-protection.html">replay protection</a> for what the marks mean in a multisig quorum.</p>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <p class="footer-note">Shrike is an unofficial fork of Sparrow Bitcoin Wallet, licensed under the Apache 2.0 licence. It is not affiliated with or endorsed by the Sparrow project.</p>
+    <div class="footer-links">
+      <a href="https://github.com/privkeyio/shrike">GitHub</a>
+      <a href="https://github.com/privkeyio/shrike/releases/latest">Releases</a>
+      <a href="https://github.com/privkeyio/shrike/issues">Issues</a>
+      <a href="/docs/">Docs</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

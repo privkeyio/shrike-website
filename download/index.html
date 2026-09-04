@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Download Shrike for Linux, macOS and Windows | Shrike</title>
+<meta name="description" content="Download Shrike for Linux, macOS and Windows, verify the release against its signed SHA256SUMS, and see which Bitcoin Knots version you need.">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Shrike">
+<meta property="og:title" content="Download Shrike for Linux, macOS and Windows | Shrike">
+<meta property="og:description" content="Download Shrike for Linux, macOS and Windows, verify the release against its signed SHA256SUMS, and see which Bitcoin Knots version you need.">
+<link rel="icon" href="/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="/">
+      <img class="brand-mark" src="/assets/images/shrike-mark.png" alt="" width="34" height="34">
+      Shrike
+    </a>
+    <nav class="nav-links">
+      <a href="/features/">Features</a>
+      <a href="/download/" aria-current="page">Download</a>
+      <a href="/docs/">Docs</a>
+      <a href="https://github.com/privkeyio/shrike">Source</a>
+    </nav>
+  </div>
+</header>
+<main>
+<div class="wrap doc">
+  <p class="kicker">Download</p>
+  <h1>Download Shrike</h1>
+  <p>Every release is published on GitHub with a <code>SHA256SUMS</code> file covering every artifact, signed with the release key. Verify before you run anything.</p>
+
+  <div class="notice">
+    <span class="notice-title">Not audited</span>
+    <p>Shrike has not been audited, and comes with no warranty of any kind. It is an unofficial fork and is not affiliated with the Sparrow project.</p>
+  </div>
+
+  <div class="btn-row">
+    <a class="btn" href="https://github.com/privkeyio/shrike/releases/latest">Latest release on GitHub</a>
+    <a class="btn btn-ghost" href="/docs/building.html">Build from source</a>
+  </div>
+
+  <h2>Which file to take</h2>
+  <p>Artifact names carry the version, so pick the matching file from the latest release rather than a link that goes stale here.</p>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Platform</th><th>File</th></tr></thead>
+      <tbody>
+        <tr><td>Debian, Ubuntu (x86_64)</td><td><code>shrike_&lt;version&gt;_amd64.deb</code></td></tr>
+        <tr><td>Debian, Ubuntu (arm64)</td><td><code>shrike_&lt;version&gt;_arm64.deb</code></td></tr>
+        <tr><td>Linux tarball (x86_64)</td><td><code>shrike-&lt;version&gt;-x86_64.tar.gz</code></td></tr>
+        <tr><td>Linux tarball (aarch64)</td><td><code>shrike-&lt;version&gt;-aarch64.tar.gz</code></td></tr>
+        <tr><td>macOS (Apple silicon)</td><td><code>Shrike-&lt;version&gt;-arm64-unsigned.dmg</code></td></tr>
+        <tr><td>macOS (Intel)</td><td><code>Shrike-&lt;version&gt;-x86_64-unsigned.dmg</code></td></tr>
+        <tr><td>Windows</td><td><code>Shrike-&lt;version&gt;.msi</code> or <code>Shrike-&lt;version&gt;.zip</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>The <code>shrikeserver-</code> and <code>shrikeserver_</code> artifacts are the headless server build, for running without a desktop.</p>
+
+  <h2>Verify the download</h2>
+  <p>Take <code>SHA256SUMS</code>, <code>SHA256SUMS.asc</code> and <code>privkeyio-signing-key.asc</code> from the same release, then:</p>
+<pre><code>gpg --import privkeyio-signing-key.asc
+gpg --verify SHA256SUMS.asc SHA256SUMS
+sha256sum --ignore-missing -c SHA256SUMS</code></pre>
+  <p>Releases are signed by Kyle Santiago &lt;kyle@privkey.io&gt;, key fingerprint:</p>
+<pre><code>A47D 99B6 DB0D 715D 40C5  9A20 23AE 8A8E A7E2 4E38</code></pre>
+
+  <div class="notice notice-accent">
+    <span class="notice-title">Unsigned installers</span>
+    <p>The macOS builds are not notarized and the Windows installer is not Authenticode signed, so both are reported as untrusted on first launch. Verify <code>SHA256SUMS</code> <em>first</em>: clearing the macOS quarantine flag removes the check that would otherwise stop a tampered download.</p>
+<pre><code>xattr -dr com.apple.quarantine /Applications/Shrike.app</code></pre>
+  </div>
+
+  <h2>What else you need</h2>
+  <p>A node that follows the fork: <a href="https://github.com/bitcoinknots/bitcoin/releases/tag/v29.4.1.knots20260508">Bitcoin Knots v29.4.1.knots20260508</a> or any later release, connected directly or behind your own Electrum server. Shrike ships with no public servers, because none of the public ones follow the fork. For an Electrum server, use a <a href="https://github.com/privkeyio/Fulcrum/releases/latest">Fulcrum build with BLAKE2b support</a> or the <a href="https://github.com/privkeyio/fulcrum-startos/releases/latest">StartOS package</a>; stock Fulcrum stops at the activation height. See <a href="/docs/connect-node.html">connecting a node</a>.</p>
+
+  <h2>Installing next to Sparrow</h2>
+  <p>Shrike uses its own home folder, packages, desktop entries and bundle identifier, so it installs alongside an existing Sparrow without sharing or overwriting any of its state. Wallet files are not shared between the two.</p>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <p class="footer-note">Shrike is an unofficial fork of Sparrow Bitcoin Wallet, licensed under the Apache 2.0 licence. It is not affiliated with or endorsed by the Sparrow project.</p>
+    <div class="footer-links">
+      <a href="https://github.com/privkeyio/shrike">GitHub</a>
+      <a href="https://github.com/privkeyio/shrike/releases/latest">Releases</a>
+      <a href="https://github.com/privkeyio/shrike/issues">Issues</a>
+      <a href="/docs/">Docs</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

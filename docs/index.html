@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Documentation: replay protection, nodes, building | Shrike</title>
+<meta name="description" content="Documentation for the Shrike fork: replay protection with SIGHASH_UNIFIED, connecting a Bitcoin Knots node or Electrum server, and building from source.">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Shrike">
+<meta property="og:title" content="Documentation: replay protection, nodes, building | Shrike">
+<meta property="og:description" content="Documentation for the Shrike fork: replay protection with SIGHASH_UNIFIED, connecting a Bitcoin Knots node or Electrum server, and building from source.">
+<link rel="icon" href="/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="/">
+      <img class="brand-mark" src="/assets/images/shrike-mark.png" alt="" width="34" height="34">
+      Shrike
+    </a>
+    <nav class="nav-links">
+      <a href="/features/">Features</a>
+      <a href="/download/">Download</a>
+      <a href="/docs/" aria-current="page">Docs</a>
+      <a href="https://github.com/privkeyio/shrike">Source</a>
+    </nav>
+  </div>
+</header>
+<main>
+<div class="wrap doc">
+  <p class="kicker">Docs</p>
+  <h1>Shrike documentation</h1>
+  <p>These pages cover what is specific to this fork. For everything Shrike inherits unchanged from Sparrow, upstream's own documentation applies.</p>
+
+  <div class="grid">
+    <a class="card" href="/docs/replay-protection.html"><h3>Replay protection</h3><p class="muted">What the opt-in signature hash does, how to mark a keystore, what a multisig quorum gets, and the Anyone Can Pay exception.</p></a>
+    <a class="card" href="/docs/firmware.html"><h3>Hardware wallet firmware</h3><p class="muted">Unofficial Coldcard, SeedSigner and Trezor builds that can sign with SIGHASH_UNIFIED, how to verify them, and what flashing one costs you.</p></a>
+    <a class="card" href="/docs/connect-node.html"><h3>Connecting a node</h3><p class="muted">Why the public servers are gone, and how to point Shrike at a Knots node or your own Electrum server.</p></a>
+    <a class="card" href="/docs/building.html"><h3>Building and running</h3><p class="muted">Recursive clone, Java and packaging requirements, running from source, command line options and the home folder.</p></a>
+    <a class="card" href="/docs/faq.html"><h3>FAQ</h3><p class="muted">Coins held across activation, using Shrike beside Sparrow, hardware wallet support, and where to report an issue.</p></a>
+  </div>
+
+  <h2>In the repository</h2>
+  <p>Some material is kept next to the code rather than here, because it is checked against the code on every change:</p>
+  <ul>
+    <li><a href="https://github.com/privkeyio/shrike/blob/master/docs/reproducible.md">Reproducing the release binaries</a></li>
+    <li><a href="https://github.com/privkeyio/shrike/blob/master/docs/blake2b-regtest.md">Verifying the proof of work against a live forked regtest node</a></li>
+    <li><a href="https://github.com/privkeyio/shrike/blob/master/docs/unified-sighash-regtest.md">Verifying the signature hash against a live forked regtest node</a></li>
+  </ul>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <p class="footer-note">Shrike is an unofficial fork of Sparrow Bitcoin Wallet, licensed under the Apache 2.0 licence. It is not affiliated with or endorsed by the Sparrow project.</p>
+    <div class="footer-links">
+      <a href="https://github.com/privkeyio/shrike">GitHub</a>
+      <a href="https://github.com/privkeyio/shrike/releases/latest">Releases</a>
+      <a href="https://github.com/privkeyio/shrike/issues">Issues</a>
+      <a href="/docs/">Docs</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
