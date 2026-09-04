@@ -43,6 +43,7 @@
       <li><a href="#keystore">Marking a keystore</a></li>
       <li><a href="#multisig">Multisig quorums</a></li>
       <li><a href="#acp">The Anyone Can Pay exception</a></li>
+      <li><a href="#demo">Seeing it on chain</a></li>
       <li><a href="#sweep">Coins held across activation</a></li>
     </ul>
   </div>
@@ -98,6 +99,10 @@
 
   <h2 id="acp">The Anyone Can Pay exception</h2>
   <p>Anyone Can Pay commits only to its own input and to the outputs. The rest of the transaction is not covered, so that single input can be lifted out of it and spent against nodes that never adopted the fork, even though the transaction as a whole cannot be replayed. The send screen names signatures of this kind, and Shrike never selects the mode by itself.</p>
+
+  <h2 id="demo">Seeing it on chain</h2>
+  <p>Greg Tonoski recorded a <a href="https://youtu.be/3Eky1BKYDZ4" rel="noreferrer">demonstration of a replay-protected transaction</a> made after activation, showing the spend and its result on chain. It is an informal community recording, not documentation for this wallet.</p>
+  <p>It was made with <code>blake2b.9</code>. The mechanism it demonstrates is unchanged, but the wallet has moved on nine releases since: <code>blake2b.16</code> reworked how the send screen reports protection, so the screens in the video do not match the ones above.</p>
 
   <h2 id="sweep">Coins held across activation</h2>
   <p>Coins that existed before activation are the same coins either way: the fork does not duplicate them or issue anything new. What it does mean is that a spend of them is only bound to the upgraded rules once it carries an opted-in signature, and a spend covers only the inputs it consumes.</p>
