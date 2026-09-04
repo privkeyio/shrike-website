@@ -43,7 +43,7 @@
       <li><a href="#keystore">Marking a keystore</a></li>
       <li><a href="#multisig">Multisig quorums</a></li>
       <li><a href="#acp">The Anyone Can Pay exception</a></li>
-      <li><a href="#demo">Seeing it on chain</a></li>
+      <li><a href="#demo">Community walkthroughs</a></li>
       <li><a href="#sweep">Coins held across activation</a></li>
     </ul>
   </div>
@@ -100,9 +100,10 @@
   <h2 id="acp">The Anyone Can Pay exception</h2>
   <p>Anyone Can Pay commits only to its own input and to the outputs. The rest of the transaction is not covered, so that single input can be lifted out of it and spent against nodes that never adopted the fork, even though the transaction as a whole cannot be replayed. The send screen names signatures of this kind, and Shrike never selects the mode by itself.</p>
 
-  <h2 id="demo">Seeing it on chain</h2>
-  <p>Greg Tonoski recorded a <a href="https://youtu.be/3Eky1BKYDZ4" rel="noreferrer">demonstration of a replay-protected transaction</a> made after activation, showing the spend and its result on chain. It is an informal community recording, not documentation for this wallet.</p>
-  <p>It was made with an early build. The mechanism it demonstrates is unchanged, but the send screen has since been reworked to report protection differently, so the screens in the video do not match the ones above.</p>
+  <h2 id="demo">Community walkthroughs</h2>
+  <p>Bitcoin University has a <a href="https://youtu.be/7-5XszJcD6g" rel="noreferrer">walkthrough of installing Shrike and connecting it to a node</a>, covering Start9 and Umbrel.</p>
+  <p>Greg Tonoski recorded a <a href="https://youtu.be/3Eky1BKYDZ4" rel="noreferrer">demonstration of a replay-protected transaction</a> made after activation, showing the spend and its result on chain. It was made with an early build, and the send screen has since been reworked to report protection differently, so its screens do not match the ones above.</p>
+  <p>Both are community recordings rather than documentation for this wallet, and both were made before the current release.</p>
 
   <h2 id="sweep">Coins held across activation</h2>
   <p>Coins that existed before activation are the same coins either way: the fork does not duplicate them or issue anything new. What it does mean is that a spend of them is only bound to the upgraded rules once it carries an opted-in signature, and a spend covers only the inputs it consumes.</p>
