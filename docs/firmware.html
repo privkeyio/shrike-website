@@ -66,6 +66,7 @@
     </table>
   </div>
   <p>Earlier releases in these repositories have been withdrawn and superseded. Take the newest one rather than an older tag, and read its notes: they say what changed and whether an earlier build should be replaced.</p>
+  <p>Keep the firmware and the wallet current together. The opt-in is negotiated through a capability the device reports, so a mismatched pair refuses to opt in rather than signing without the protection. If a marked device stops opting in after you update one of them, update the other.</p>
 
   <h2>Verifying a build</h2>
   <p>Each release carries a <code>SHA256SUMS</code> signed with the same key as the Shrike releases. Verify before flashing:</p>
@@ -80,7 +81,7 @@ sha256sum --ignore-missing -c SHA256SUMS</code></pre>
 </main>
 <footer class="site-footer">
   <div class="wrap footer-grid">
-    <p class="footer-note">Shrike has not been audited and comes with no warranty of any kind. It is an unofficial fork of Sparrow Bitcoin Wallet, licensed under the Apache 2.0 licence, and is not affiliated with or endorsed by the Sparrow project.</p>
+    <p class="footer-note">Shrike has not been audited and comes with no warranty of any kind. It is an unofficial fork of Sparrow Bitcoin Wallet, licensed under the Apache 2.0 license, and is not affiliated with or endorsed by the Sparrow project.</p>
     <div class="footer-links">
       <a href="https://github.com/privkeyio/shrike">GitHub</a>
       <a href="https://github.com/privkeyio/shrike/releases/latest">Releases</a>
