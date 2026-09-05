@@ -34,7 +34,7 @@
   <p class="kicker">Docs</p>
   <h1>Connecting a node or Electrum server</h1>
   <p>A wallet has to get its information from somewhere: which coins are yours, what has arrived, what fee to pay. Most wallets come with public servers already set up to answer that.</p>
-  <p>Shrike does not, and that is deliberate. The public ones are still following the old rules, so they would be answering about a different chain than the one you are spending on. Rather than ship defaults that look like they work and quietly mislead you, Shrike ships none and asks you to point it at something you trust.</p>
+  <p>Shrike does not, and that is deliberate. The public ones are still on the SHA256d chain, so they would be answering about a different chain than the one you are spending on. Rather than ship defaults that look like they work and quietly mislead you, Shrike ships none and asks you to point it at something you trust.</p>
   <p>There are two ways to do that, both below: connect it straight to your own Bitcoin Knots node, or run your own Electrum server in front of that node. Either way the node has to be a recent enough Knots.</p>
   <div class="notice notice-accent">
     <span class="notice-title">Minimum node version</span>
@@ -53,7 +53,7 @@
   <p>Either beats a server someone else runs, which is most of why the preconfigured ones are gone.</p>
 
   <h2 id="why-the-public-servers-are-gone">Why the public servers are gone <a class="hlink" href="#why-the-public-servers-are-gone" aria-label="Link to this section">#</a></h2>
-  <p>A server that did not take the upgrade stops following the chain at the activation height and carries on under the pre-fork rules. Point Shrike at one and it reports a history that ends there, prices fees against a mempool you are not broadcasting into, and judges transactions by rules Shrike is not following. Rather than leave working-looking but wrong defaults in the settings, the fork removes them.</p>
+  <p>A server that did not take the upgrade stops following the chain at the activation height and carries on as the SHA256d chain. Point Shrike at one and it reports a history that ends there, prices fees against a mempool you are not broadcasting into, and judges transactions by rules Shrike is not following. Rather than leave working-looking but wrong defaults in the settings, the fork removes them.</p>
   <p>Fee rates, block explorer links and broadcast all go to <a href="https://mempool.guide">mempool.guide</a>, which is on the current chain, and over Tor where a proxy is configured.</p>
 
   <h2 id="option-1-a-knots-node">Option 1: a Knots node <a class="hlink" href="#option-1-a-knots-node" aria-label="Link to this section">#</a></h2>
