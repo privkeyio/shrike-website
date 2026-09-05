@@ -48,7 +48,7 @@
 
 <section>
   <div class="wrap">
-    <h2>What it does</h2>
+    <h2 id="what-it-does">What it does <a class="hlink" href="#what-it-does" aria-label="Link to this section">#</a></h2>
     <p class="section-lede">Shrike builds on Sparrow, so the wallet itself is a mature one.</p>
     <ul>
       <li>Single signature and multisig wallets across the common script types</li>
@@ -66,31 +66,31 @@
 
 <section>
   <div class="wrap">
-    <h2>What Shrike changes</h2>
+    <h2 id="what-shrike-changes">What Shrike changes <a class="hlink" href="#what-shrike-changes" aria-label="Link to this section">#</a></h2>
     <p class="section-lede">Everything not listed here is Sparrow: the same wallet model, the same hardware wallet support, the same PSBT workflow.</p>
     <div class="grid">
       <div class="card">
-        <h3>BLAKE2b proof of work</h3>
+        <h3 id="blake2b-proof-of-work">BLAKE2b proof of work <a class="hlink" href="#blake2b-proof-of-work" aria-label="Link to this section">#</a></h3>
         <p class="muted">Validates the 164 byte v2 block header and takes the BLAKE2b hash as the block id past activation. The work itself lives in the drongo submodule.</p>
       </div>
       <div class="card">
-        <h3>Unified opt-in signature hash</h3>
+        <h3 id="unified-opt-in-signature-hash">Unified opt-in signature hash <a class="hlink" href="#unified-opt-in-signature-hash" aria-label="Link to this section">#</a></h3>
         <p class="muted">Past activation, signs with <code>SIGHASH_UNIFIED</code>: the <code>0x20</code> flag set on the base hash type, <code>0x21</code> by default. The pre-fork rules reject that hash type, which is exactly what makes the signature unreplayable.</p>
       </div>
       <div class="card">
-        <h3>Per-keystore opt-in</h3>
+        <h3 id="per-keystore-opt-in">Per-keystore opt-in <a class="hlink" href="#per-keystore-opt-in" aria-label="Link to this section">#</a></h3>
         <p class="muted">Nothing a hardware device or watch-only keystore reports tells the wallet what firmware will sign for it, so you mark each one by hand. One marked signer in a quorum is enough.</p>
       </div>
       <div class="card">
-        <h3>Only services that kept up</h3>
+        <h3 id="only-services-that-kept-up">Only services that kept up <a class="hlink" href="#only-services-that-kept-up" aria-label="Link to this section">#</a></h3>
         <p class="muted">Fee rates, explorer links and broadcast go to <a href="https://mempool.guide">mempool.guide</a>. The preconfigured public Electrum servers are gone, because they stopped at the activation height.</p>
       </div>
       <div class="card">
-        <h3>Separate application identity</h3>
+        <h3 id="separate-application-identity">Separate application identity <a class="hlink" href="#separate-application-identity" aria-label="Link to this section">#</a></h3>
         <p class="muted">Installs alongside an existing Sparrow without sharing state: its own <code>~/.shrike</code> folder, packages, desktop entries, MIME types and macOS bundle identifier.</p>
       </div>
       <div class="card">
-        <h3>Verified end to end</h3>
+        <h3 id="verified-end-to-end">Verified end to end <a class="hlink" href="#verified-end-to-end" aria-label="Link to this section">#</a></h3>
         <p class="muted">The proof of work and the signature hash are both checked against a live forked regtest node, not just unit tested. The release binaries are reproducible.</p>
       </div>
     </div>
@@ -99,7 +99,7 @@
 
 <section>
   <div class="wrap">
-    <h2>Activation</h2>
+    <h2 id="activation">Activation <a class="hlink" href="#activation" aria-label="Link to this section">#</a></h2>
     <p class="section-lede">Past these heights, Shrike validates BLAKE2b work and opts in when it signs.</p>
     <div class="table-scroll">
       <table>
@@ -117,7 +117,7 @@
 
 <section>
   <div class="wrap">
-    <h2>Check the send screen</h2>
+    <h2 id="check-the-send-screen">Check the send screen <a class="hlink" href="#check-the-send-screen" aria-label="Link to this section">#</a></h2>
     <p class="section-lede">A signature that does not opt in is valid under both rule sets, so it can be replayed. Shrike selects the opt-in by default and says plainly what each transaction got.</p>
     <figure>
       <img src="/assets/images/send-replay-protected.png" alt="The send screen reporting a transaction as replay protected">
@@ -130,11 +130,11 @@
 
 <section>
   <div class="wrap">
-    <h2>Get started</h2>
+    <h2 id="get-started">Get started <a class="hlink" href="#get-started" aria-label="Link to this section">#</a></h2>
     <div class="grid">
-      <a class="card" href="/download/"><h3>Download</h3><p class="muted">Packages for Linux, macOS and Windows, with a signed <code>SHA256SUMS</code> covering every file.</p></a>
-      <a class="card" href="/docs/connect-node.html"><h3>Connect a node</h3><p class="muted">Point Shrike at Bitcoin Knots v29.4.1.knots20260508 or later, or your own Electrum server indexing one.</p></a>
-      <a class="card" href="/docs/building.html"><h3>Build from source</h3><p class="muted">Clone recursively, build with Gradle, or reproduce the published binaries.</p></a>
+      <a class="card" href="/download/"><h3 id="download">Download</h3><p class="muted">Packages for Linux, macOS and Windows, with a signed <code>SHA256SUMS</code> covering every file.</p></a>
+      <a class="card" href="/docs/connect-node.html"><h3 id="connect-a-node">Connect a node</h3><p class="muted">Point Shrike at Bitcoin Knots v29.4.1.knots20260508 or later, or your own Electrum server indexing one.</p></a>
+      <a class="card" href="/docs/building.html"><h3 id="build-from-source">Build from source</h3><p class="muted">Clone recursively, build with Gradle, or reproduce the published binaries.</p></a>
     </div>
   </div>
 </section>

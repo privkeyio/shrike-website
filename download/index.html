@@ -46,7 +46,7 @@
     <a class="btn btn-ghost" href="/docs/building.html">Build from source</a>
   </div>
 
-  <h2>Which file to take</h2>
+  <h2 id="which-file-to-take">Which file to take <a class="hlink" href="#which-file-to-take" aria-label="Link to this section">#</a></h2>
   <p>Artifact names carry the version, so pick the matching file from the latest release rather than a link that goes stale here.</p>
   <div class="table-scroll">
     <table>
@@ -64,14 +64,14 @@
   </div>
   <p>The <code>shrikeserver-</code> and <code>shrikeserver_</code> artifacts are the headless server build, for running without a desktop.</p>
 
-  <h2>Verify the download</h2>
+  <h2 id="verify-the-download">Verify the download <a class="hlink" href="#verify-the-download" aria-label="Link to this section">#</a></h2>
   <p>There are two ways to do this. If you already have Shrike installed, it can check the download for you. Otherwise it is a few commands.</p>
 
-  <h3>If you already have Shrike</h3>
+  <h3 id="if-you-already-have-shrike">If you already have Shrike <a class="hlink" href="#if-you-already-have-shrike" aria-label="Link to this section">#</a></h3>
   <p>Download <code>SHA256SUMS</code> and <code>SHA256SUMS.asc</code> from the release, then drag either one onto the Shrike window. The verify dialog opens and checks the file for you. You can also reach it from <strong>Tools &rarr; Verify Download</strong>.</p>
   <p>This is the easiest route, and it works for a fresh download of a new version while your existing install stays untouched.</p>
 
-  <h3>From the command line</h3>
+  <h3 id="from-the-command-line">From the command line <a class="hlink" href="#from-the-command-line" aria-label="Link to this section">#</a></h3>
   <p>You need <code>gpg</code>. It is preinstalled on most Linux systems; on macOS and Windows you will need to install GnuPG first.</p>
   <p>Put three files in the same folder as the installer you downloaded, all from the same release: <code>privkeyio-signing-key.asc</code>, <code>SHA256SUMS</code> and <code>SHA256SUMS.asc</code>. Then open a terminal in that folder, for example <code>cd ~/Downloads</code>.</p>
 
@@ -109,12 +109,12 @@ gpg: Good signature from "Kyle Santiago &lt;kyle@privkey.io&gt;" [unknown]</code
 <pre><code>xattr -dr com.apple.quarantine /Applications/Shrike.app</code></pre>
   </div>
 
-  <h2>What else you need</h2>
+  <h2 id="what-else-you-need">What else you need <a class="hlink" href="#what-else-you-need" aria-label="Link to this section">#</a></h2>
   <p>A node that is up to date: <a href="https://github.com/bitcoinknots/bitcoin/releases/tag/v29.4.1.knots20260508">Bitcoin Knots v29.4.1.knots20260508</a> or any later release, connected directly or behind your own Electrum server. Shrike ships with no public servers, because the ones it inherited from upstream stopped at the activation height. For an Electrum server, use a <a href="https://github.com/privkeyio/Fulcrum/releases/latest">Fulcrum build with BLAKE2b support</a> or the <a href="https://github.com/privkeyio/fulcrum-startos/releases/latest">StartOS package</a>; stock Fulcrum stops at the activation height. See <a href="/docs/connect-node.html">connecting a node</a>.</p>
 
   <p>If you would rather follow along, Bitcoin University has a <a href="https://youtu.be/7-5XszJcD6g" rel="noreferrer">walkthrough of installing Shrike and pointing it at a node</a>, covering Start9 and Umbrel. It is a community recording made before the current release.</p>
 
-  <h2>Installing next to Sparrow</h2>
+  <h2 id="installing-next-to-sparrow">Installing next to Sparrow <a class="hlink" href="#installing-next-to-sparrow" aria-label="Link to this section">#</a></h2>
   <p>Shrike uses its own home folder, packages, desktop entries and bundle identifier, so it installs alongside an existing Sparrow without sharing or overwriting any of its state. Wallet files are not shared between the two.</p>
 </div>
 </main>

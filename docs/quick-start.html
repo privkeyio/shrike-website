@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quick start: your first wallet | Shrike</title>
+<meta name="description" content="Getting from a fresh download to a first send with Shrike: stand up a node, connect it, mark your signers, and check the send screen.">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Shrike">
+<meta property="og:title" content="Quick start: your first wallet | Shrike">
+<meta property="og:description" content="Getting from a fresh download to a first send with Shrike: stand up a node, connect it, mark your signers, and check the send screen.">
+<link rel="icon" href="/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="/">
+      <img class="brand-mark" src="/assets/images/shrike-plate.png" alt="" width="34" height="34">
+      Shrike
+    </a>
+    <nav class="nav-links">
+      <a href="/features/">Features</a>
+      <a href="/download/">Download</a>
+      <a href="/docs/" aria-current="page">Docs</a>
+      <a href="https://github.com/privkeyio/shrike">Source</a>
+    </nav>
+  </div>
+</header>
+<main>
+<div class="wrap doc">
+  <p class="kicker">Docs</p>
+  <h1>Quick start</h1>
+  <p>Getting from a fresh download to a first send. The one step people are caught out by is the second: Shrike will not show you a balance until you give it a node, because it ships with no servers of its own.</p>
+
+  <div class="toc">
+    <ul>
+      <li><a href="#node">1. Get a node running</a></li>
+      <li><a href="#install">2. Download, verify, install</a></li>
+      <li><a href="#connect">3. Point Shrike at your node</a></li>
+      <li><a href="#wallet">4. Create or import a wallet</a></li>
+      <li><a href="#signers">5. Mark your signers</a></li>
+      <li><a href="#send">6. Before your first send</a></li>
+      <li><a href="#sweep">7. If you held coins before activation</a></li>
+    </ul>
+  </div>
+
+  <h2 id="node">1. Get a node running <a class="hlink" href="#node" aria-label="Link to this section">#</a></h2>
+  <p>Do this first. Every other step depends on it, and it is the slowest part because the node has to sync.</p>
+  <p>You need Bitcoin Knots at <a href="https://github.com/bitcoinknots/bitcoin/releases/tag/v29.4.1.knots20260508">v29.4.1.knots20260508</a> or later. For a large wallet, an Electrum server in front of it makes scanning much faster. <a href="/docs/connect-node.html">Connecting a node</a> covers both arrangements and why the usual public servers are not an option.</p>
+
+  <h2 id="install">2. Download, verify, install <a class="hlink" href="#install" aria-label="Link to this section">#</a></h2>
+  <p>Take the build for your platform from the <a href="/download/">download page</a> and check it against the signed checksums before you run it. That page walks through the verification step by step.</p>
+  <p>Shrike installs alongside an existing Sparrow without touching it, so you do not have to uninstall anything first.</p>
+
+  <h2 id="connect">3. Point Shrike at your node <a class="hlink" href="#connect" aria-label="Link to this section">#</a></h2>
+  <p>Open <strong>Settings &rarr; Server</strong> and pick <strong>Bitcoin Knots</strong> to connect straight to your node, or <strong>Private Electrum</strong> if you are running a server in front of it. The status indicator turns green for a node and blue for an Electrum server once it connects.</p>
+
+  <h2 id="wallet">4. Create or import a wallet <a class="hlink" href="#wallet" aria-label="Link to this section">#</a></h2>
+  <p>This part is unchanged from upstream, so <a href="https://sparrowwallet.com/docs/">Sparrow's documentation</a> applies in full: single signature or multisig, software or hardware keystores, and the import flows all behave as they do there.</p>
+
+  <h2 id="signers">5. Mark your signers <a class="hlink" href="#signers" aria-label="Link to this section">#</a></h2>
+  <p>This step is specific to Shrike, and skipping it is the usual reason a transaction ends up unprotected.</p>
+  <p>Nothing a hardware wallet reports tells Shrike which firmware it is running, so you say so yourself: tick <strong>Replay protection</strong> on each keystore whose device can sign the new way. A keystore holding its own key needs no mark. See <a href="/docs/replay-protection.html">replay protection</a> for what the marks mean, and <a href="/docs/firmware.html">hardware wallet firmware</a> if your device needs new firmware first.</p>
+  <p>You may not need to do anything here. In a multisig wallet, one marked signer is enough to protect the whole transaction.</p>
+
+  <h2 id="send">6. Before your first send <a class="hlink" href="#send" aria-label="Link to this section">#</a></h2>
+  <p>Build the transaction as usual, then read the send screen before you sign. It says whether the transaction is protected, and if it is not, hovering the status names what is refusing and what to do about it.</p>
+  <p>Get into the habit on the first send rather than the tenth. It is the one check that cannot be done after the fact.</p>
+
+  <h2 id="sweep">7. If you held coins before activation <a class="hlink" href="#sweep" aria-label="Link to this section">#</a></h2>
+  <p>Send them to yourself once. Until you do, a transaction spending those coins stays valid under the old rules as well, so anyone holding a copy of it can submit it there. One sweep to your own address settles it.</p>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <p class="footer-note">Shrike has not been audited and comes with no warranty of any kind. It is an unofficial fork of Sparrow Bitcoin Wallet, licensed under the Apache 2.0 license, and is not affiliated with or endorsed by the Sparrow project.</p>
+    <div class="footer-links">
+      <a href="https://github.com/privkeyio/shrike">GitHub</a>
+      <a href="https://github.com/privkeyio/shrike/releases/latest">Releases</a>
+      <a href="https://github.com/privkeyio/shrike/issues">Issues</a>
+      <a href="/docs/">Docs</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

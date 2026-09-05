@@ -35,19 +35,19 @@
   <h1>Shrike FAQ</h1>
   <p>Questions specific to Shrike. For how the wallet itself works, upstream's documentation applies unchanged.</p>
 
-  <h2>Is this a different coin?</h2>
+  <h2 id="is-this-a-different-coin">Is this a different coin? <a class="hlink" href="#is-this-a-different-coin" aria-label="Link to this section">#</a></h2>
   <p>No. The BLAKE2b hardfork is an upgrade to Bitcoin's proof of work, applied to the existing chain at a set height. There is no new chain, no new asset and no distribution of anything: the coins in a Shrike wallet are the Bitcoin that was already there, with the history it always had. What changes past the activation height is how blocks are hashed and how transactions are signed.</p>
 
-  <h2>Can I run Shrike and Sparrow on the same machine?</h2>
+  <h2 id="can-i-run-shrike-and-sparrow-on-the-same-machine">Can I run Shrike and Sparrow on the same machine? <a class="hlink" href="#can-i-run-shrike-and-sparrow-on-the-same-machine" aria-label="Link to this section">#</a></h2>
   <p>Yes. Shrike has its own home folder, packages, desktop entries, MIME registrations and macOS bundle identifier, so neither installation touches the other's state. Wallet files are not shared between them: a wallet you want in both has to be opened in both.</p>
 
-  <h2>What happens to coins I held before activation?</h2>
+  <h2 id="what-happens-to-coins-i-held-before-activation">What happens to coins I held before activation? <a class="hlink" href="#what-happens-to-coins-i-held-before-activation" aria-label="Link to this section">#</a></h2>
   <p>They are the same coins, and the fork neither duplicates them nor issues anything alongside them. But a spend of them is only bound to the upgraded rules once it carries an opted-in signature, and a spend covers only the inputs it consumes, so a transaction spending pre-fork coins stays valid under the old rules too. Sweep every pre-fork UTXO to yourself before transacting with anyone still running them.</p>
 
-  <h2>What node do I need?</h2>
+  <h2 id="what-node-do-i-need">What node do I need? <a class="hlink" href="#what-node-do-i-need" aria-label="Link to this section">#</a></h2>
   <p>Bitcoin Knots at <a href="https://github.com/bitcoinknots/bitcoin/releases/tag/v29.4.1.knots20260508">v29.4.1.knots20260508</a> or any later release, either directly or behind your own Electrum server. It is also the only node that reports the activation height, through <code>getdeploymentinfo</code>, which is what lets Shrike cross check its compiled-in height rather than trusting it.</p>
 
-  <h2>Does my hardware wallet work?</h2>
+  <h2 id="does-my-hardware-wallet-work">Does my hardware wallet work? <a class="hlink" href="#does-my-hardware-wallet-work" aria-label="Link to this section">#</a></h2>
   <p>It signs either way. Whether it can produce the new hash type depends on its firmware, and nothing the device reports says which firmware it runs, so Shrike does not guess: you mark the keystore yourself under <strong>Replay protection</strong>. An unmarked device still signs, with the hash type it can produce, and the send screen reports what the transaction actually got.</p>
   <p>Stock firmware cannot produce it yet. Unofficial builds exist for Coldcard, SeedSigner and every current Trezor, and flashing one voids the manufacturer warranty; see <a href="/docs/firmware.html">hardware wallet firmware</a> before you consider it.</p>
 
@@ -56,28 +56,28 @@
   <p>What happened is a mismatch between what the wallet asked for and what the firmware can do. The keystore is marked under <strong>Replay protection</strong>, so Shrike asked for the new hash type, and the firmware on the device does not implement it. A signer that cannot produce the type it was asked for adds nothing, rather than quietly signing something else, so the device reports that no valid signature was added. SeedSigner words it <em>"Signing with this seed did not add a valid signature"</em>. If the same device signed for you before and refuses now, what changed is that the keystore became marked, or the chain reached the activation height.</p>
   <p>There are two ways on. Flash a build that implements the opt-in, listed under <a href="/docs/firmware.html">hardware wallet firmware</a>, and the same transaction signs. Or untick the mark on that keystore in the wallet settings and send the ordinary way, which every stock signer can do. Be clear about what the second one costs: a signature without the opt-in is valid under the pre-fork rules too, so that transaction can be replayed by anyone still running them, and replay protection is exactly what you are giving up for the convenience.</p>
 
-  <h2>Why can I not pick a public Electrum server?</h2>
+  <h2 id="why-can-i-not-pick-a-public-electrum-server">Why can I not pick a public Electrum server? <a class="hlink" href="#why-can-i-not-pick-a-public-electrum-server" aria-label="Link to this section">#</a></h2>
   <p>Because the ones Shrike inherited from upstream do not follow it. A server that did not take the upgrade stops at the activation height and carries on under the pre-fork rules, so it reports a history that ends there. Connect a Bitcoin Knots node at <a href="https://github.com/bitcoinknots/bitcoin/releases/tag/v29.4.1.knots20260508">v29.4.1.knots20260508</a> or later, or your own Electrum server indexing one. Stock Fulcrum will not work either, for the same reason; <a href="https://github.com/privkeyio/Fulcrum/releases/latest">builds with BLAKE2b support</a> are available. See <a href="/docs/connect-node.html">connecting a node</a>.</p>
 
-  <h2>Why are blocks smaller than they used to be?</h2>
+  <h2 id="why-are-blocks-smaller-than-they-used-to-be">Why are blocks smaller than they used to be? <a class="hlink" href="#why-are-blocks-smaller-than-they-used-to-be" aria-label="Link to this section">#</a></h2>
   <p>The fork carries temporary data storage limits alongside the proof-of-work change: roughly 300 kB serialized, about 800,000 weight units, from the activation height until 1 September 2027 at 00:00 UTC, after which nodes vote on them by median time past. Less space per block means more competition for it, so expect fee estimates to run higher than the pre-fork norm and size a transaction accordingly.</p>
 
-  <h2>Why is only mempool.guide offered?</h2>
+  <h2 id="why-is-only-mempoolguide-offered">Why is only mempool.guide offered? <a class="hlink" href="#why-is-only-mempoolguide-offered" aria-label="Link to this section">#</a></h2>
   <p><a href="https://mempool.guide">mempool.guide</a> is the one fee, explorer and broadcast service still on the current chain. A fee estimate from a mempool you are not broadcasting into prices the transaction wrongly, and an explorer that stopped at the activation height shows a history that ends there, so the alternatives are removed rather than left in place to mislead.</p>
 
-  <h2>Is a transaction replay protected if only one signer in my multisig is marked?</h2>
+  <h2 id="is-a-transaction-replay-protected-if-only-one-signer-in-my-multisig-is-marked">Is a transaction replay protected if only one signer in my multisig is marked? <a class="hlink" href="#is-a-transaction-replay-protected-if-only-one-signer-in-my-multisig-is-marked" aria-label="Link to this section">#</a></h2>
   <p>Only when that signer takes part. One marked signer in the quorum that actually forms is enough, which is why the wallet reports the result on the send screen per transaction instead of promising it in advance. Marking two of a 2-of-3 makes it unconditional.</p>
 
-  <h2>Why does the wallet say the activation height went unchecked?</h2>
+  <h2 id="why-does-the-wallet-say-the-activation-height-went-unchecked">Why does the wallet say the activation height went unchecked? <a class="hlink" href="#why-does-the-wallet-say-the-activation-height-went-unchecked" aria-label="Link to this section">#</a></h2>
   <p>Because the node you are connected to does not report one. Only Knots does, through <code>getdeploymentinfo</code>. Shrike still opts in, and says the cross check did not happen rather than implying it did. Where a node does report a height and it disagrees with the compiled-in one, Shrike declines to opt in instead of following either.</p>
 
-  <h2>Has this been audited?</h2>
+  <h2 id="has-this-been-audited">Has this been audited? <a class="hlink" href="#has-this-been-audited" aria-label="Link to this section">#</a></h2>
   <p>No. It is not audited and carries no warranty of any kind. Read the <a href="https://github.com/privkeyio/shrike/blob/master/LICENSE">Apache 2.0 license</a>.</p>
 
-  <h2>Where do I report a problem?</h2>
+  <h2 id="where-do-i-report-a-problem">Where do I report a problem? <a class="hlink" href="#where-do-i-report-a-problem" aria-label="Link to this section">#</a></h2>
   <p>Problems specific to Shrike go to the <a href="https://github.com/privkeyio/shrike/issues">issue tracker here</a>. Anything that would also happen in Sparrow belongs <a href="https://github.com/sparrowwallet/sparrow/issues">upstream</a>. The log file in the configuration directory is usually where the useful detail is.</p>
 
-  <h2>Who wrote this?</h2>
+  <h2 id="who-wrote-this">Who wrote this? <a class="hlink" href="#who-wrote-this" aria-label="Link to this section">#</a></h2>
   <p>The v2 block header, the BLAKE2b proof of work, the separate application identity and the packaging were written by <a href="https://github.com/AcesHigh70">AcesHigh70</a>, and are no longer maintained there. This fork continues that work and adds the unified opt-in signature hash. Sparrow itself is the work of the <a href="https://github.com/sparrowwallet/sparrow">Sparrow project</a>, which has not added support for it and is not affiliated with Shrike.</p>
 </div>
 </main>

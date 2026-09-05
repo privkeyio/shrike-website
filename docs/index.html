@@ -36,14 +36,23 @@
   <p>These pages cover what is specific to Shrike. For everything Shrike inherits unchanged from Sparrow, upstream's own documentation applies.</p>
 
   <div class="grid">
-    <a class="card" href="/docs/connect-node.html"><h3>Connecting a node</h3><p class="muted">Why the public servers are gone, and how to point Shrike at a Knots node or your own Electrum server.</p></a>
-    <a class="card" href="/docs/replay-protection.html"><h3>Replay protection</h3><p class="muted">What the opt-in signature hash does, how to mark a keystore, what a multisig quorum gets, and the Anyone Can Pay exception.</p></a>
-    <a class="card" href="/docs/firmware.html"><h3>Hardware wallet firmware</h3><p class="muted">Unofficial Coldcard, SeedSigner and Trezor builds that can sign with SIGHASH_UNIFIED, how to verify them, and what flashing one costs you.</p></a>
-    <a class="card" href="/docs/building.html"><h3>Building and running</h3><p class="muted">Recursive clone, Java and packaging requirements, running from source, command line options and the home folder.</p></a>
-    <a class="card" href="/docs/faq.html"><h3>FAQ</h3><p class="muted">Coins held across activation, using Shrike beside Sparrow, hardware wallet support, and where to report an issue.</p></a>
+    <a class="card" href="/docs/quick-start.html"><h3 id="quick-start">Quick start</h3><p class="muted">From a fresh download to a first send: stand up a node, connect it, mark your signers, check the send screen.</p></a>
+    <a class="card" href="/docs/connect-node.html"><h3 id="connecting-a-node">Connecting a node</h3><p class="muted">Why the public servers are gone, and how to point Shrike at a Knots node or your own Electrum server.</p></a>
+    <a class="card" href="/docs/replay-protection.html"><h3 id="replay-protection">Replay protection</h3><p class="muted">What the opt-in signature hash does, how to mark a keystore, what a multisig quorum gets, and the Anyone Can Pay exception.</p></a>
+    <a class="card" href="/docs/firmware.html"><h3 id="hardware-wallet-firmware">Hardware wallet firmware</h3><p class="muted">Unofficial Coldcard, SeedSigner and Trezor builds that can sign with SIGHASH_UNIFIED, how to verify them, and what flashing one costs you.</p></a>
+    <a class="card" href="/docs/building.html"><h3 id="building-and-running">Building and running</h3><p class="muted">Recursive clone, Java and packaging requirements, running from source, command line options and the home folder.</p></a>
+    <a class="card" href="/docs/faq.html"><h3 id="faq">FAQ</h3><p class="muted">Coins held across activation, using Shrike beside Sparrow, hardware wallet support, and where to report an issue.</p></a>
   </div>
 
-  <h2>In the repository</h2>
+  <h2 id="from-sparrow">From Sparrow's documentation <a class="hlink" href="#from-sparrow" aria-label="Link to this section">#</a></h2>
+  <p>Most of the wallet is upstream's work and behaves as it does there, so rather than restate it, <a href="https://sparrowwallet.com/docs/">Sparrow's documentation</a> is worth reading alongside these pages. It covers wallet creation, hardware wallets, the transaction editor, airgapped workflows, privacy and server performance.</p>
+  <p>Two differences run through all of it, so keep them in mind wherever you are reading:</p>
+  <ul>
+    <li><strong>Shrike offers no public servers.</strong> Anywhere upstream assumes you can pick one, that option does not exist here. Your own node, or your own Electrum server in front of it, is the only arrangement. See <a href="/docs/connect-node.html">connecting a node</a>.</li>
+    <li><strong>Signing has to opt in.</strong> A device on stock firmware still signs, but produces signatures that can be replayed. See <a href="/docs/replay-protection.html">replay protection</a> and <a href="/docs/firmware.html">hardware wallet firmware</a>.</li>
+  </ul>
+
+  <h2 id="in-the-repository">In the repository <a class="hlink" href="#in-the-repository" aria-label="Link to this section">#</a></h2>
   <p>Some material is kept next to the code rather than here, because it is checked against the code on every change:</p>
   <ul>
     <li><a href="https://github.com/privkeyio/shrike/blob/master/docs/reproducible.md">Reproducing the release binaries</a></li>
