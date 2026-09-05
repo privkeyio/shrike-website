@@ -51,7 +51,7 @@
     </ul>
   </div>
 
-  <h2 id="how">How the opt-in works</h2>
+  <h2 id="how">How the opt-in works <a class="hlink" href="#how" aria-label="Link to this section">#</a></h2>
   <p>Replay is the one thing a hardfork of Bitcoin has to handle carefully. The chain, the coins and the history are unchanged; what changes at the activation height is the proof of work and the signature hash, and until your coins have moved under the new rules a transaction you sign can be valid on both sides of that height.</p>
   <p>Past the activation height Shrike signs with <code>SIGHASH_UNIFIED</code>, the name the fork uses for this opt-in. It is not a hash type of its own but a flag, <code>0x20</code>, set on the base type a signature already carries:</p>
   <div class="table-scroll">
@@ -77,7 +77,7 @@
   </div>
   <p>The compiled-in height is cross checked against the connected node wherever the node reports one, and a disagreement makes Shrike decline to opt in rather than follow either number. Only Knots reports it, through <code>getdeploymentinfo</code>. Behind anything else the wallet still opts in, and tells you the height went unchecked.</p>
 
-  <h2 id="send">Reading the send screen</h2>
+  <h2 id="send">Reading the send screen <a class="hlink" href="#send" aria-label="Link to this section">#</a></h2>
   <p>The opt-in is selected by default, and the send screen reports what the transaction actually got. Check it before you build anything.</p>
   <figure>
     <img src="/assets/images/send-replay-protected.png" alt="The send screen reporting a transaction as replay protected">
@@ -89,7 +89,7 @@
   </figure>
   <p>Where a signer is the reason, the fix is to mark it, below. Where the wallet cannot opt in at all, it signs the legacy way rather than failing, and says so.</p>
 
-  <h2 id="keystore">Marking a keystore</h2>
+  <h2 id="keystore">Marking a keystore <a class="hlink" href="#keystore" aria-label="Link to this section">#</a></h2>
   <p>Nothing a hardware device reports says which firmware it runs, and a watch-only keystore reports nothing about signing at all. So the wallet cannot detect the opt-in: you tell it. Open the wallet settings, go to the keystore tab, and tick <strong>Replay protection</strong> for each keystore whose signer you know produces the new hash type. It is off until you say so.</p>
   <figure>
     <img src="/assets/images/keystore-replay-protection.png" alt="The Replay protection field in the keystore tab, marked as supported by this device">
@@ -97,19 +97,19 @@
   </figure>
   <p>Stock firmware from any manufacturer cannot produce <code>SIGHASH_UNIFIED</code> yet. Where a device needs new firmware to be markable, see <a href="/docs/firmware.html">hardware wallet firmware</a> for the builds that exist and what flashing one costs you.</p>
 
-  <h2 id="multisig">Multisig quorums</h2>
+  <h2 id="multisig">Multisig quorums <a class="hlink" href="#multisig" aria-label="Link to this section">#</a></h2>
   <p>One marked signer is enough for the transaction to opt in, and unmarked signers still sign: each is handed the hash type it can actually produce.</p>
   <p>What that means in practice depends on how many you mark. Mark two of a 2-of-3 and every transaction opts in, because any quorum that forms contains at least one of them. Mark one and it depends on that signer taking part, which is why the wallet reports the result per transaction on the send screen instead of promising anything in advance.</p>
 
-  <h2 id="acp">The Anyone Can Pay exception</h2>
+  <h2 id="acp">The Anyone Can Pay exception <a class="hlink" href="#acp" aria-label="Link to this section">#</a></h2>
   <p>Anyone Can Pay commits only to its own input and to the outputs. The rest of the transaction is not covered, so that single input can be lifted out of it and spent against nodes still on the old rules, even though the transaction as a whole cannot be replayed. The send screen names signatures of this kind, and Shrike never selects the mode by itself.</p>
 
-  <h2 id="demo">Community walkthroughs</h2>
+  <h2 id="demo">Community walkthroughs <a class="hlink" href="#demo" aria-label="Link to this section">#</a></h2>
   <p>Bitcoin University has a <a href="https://youtu.be/7-5XszJcD6g" rel="noreferrer">walkthrough of installing Shrike and connecting it to a node</a>, covering Start9 and Umbrel.</p>
   <p>Greg Tonoski recorded a <a href="https://youtu.be/3Eky1BKYDZ4" rel="noreferrer">demonstration of a replay-protected transaction</a> made after activation, showing the spend and its result on chain. It was made with an early build, and the send screen has since been reworked to report protection differently, so its screens do not match the ones above.</p>
   <p>Both are community recordings rather than documentation for this wallet, and both were made before the current release.</p>
 
-  <h2 id="sweep">Coins held across activation</h2>
+  <h2 id="sweep">Coins held across activation <a class="hlink" href="#sweep" aria-label="Link to this section">#</a></h2>
   <p>Coins that existed before activation are the same coins either way: the fork does not duplicate them or issue anything new. What it does mean is that a spend of them is only bound to the upgraded rules once it carries an opted-in signature, and a spend covers only the inputs it consumes.</p>
   <p>So sweep every pre-fork UTXO to yourself before transacting with anyone still on the old rules. Until you do, a transaction spending those coins stays valid under the pre-fork rules as well, and anyone holding a copy of it can submit it there.</p>
 </div>

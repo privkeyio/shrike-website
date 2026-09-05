@@ -35,23 +35,23 @@
   <h1>Building and running Shrike</h1>
   <p>Build requirements are unchanged from upstream. The one thing to get right is the recursive clone.</p>
 
-  <h2>Clone</h2>
+  <h2 id="clone">Clone <a class="hlink" href="#clone" aria-label="Link to this section">#</a></h2>
   <p>Clone this repository rather than upstream's, and <code>--recursive</code> matters: the BLAKE2b work lives in the drongo submodule, and a flat clone will not build.</p>
 <pre><code>git clone --recursive https://github.com/privkeyio/shrike.git</code></pre>
   <p>When updating later:</p>
 <pre><code>git pull --recurse-submodules</code></pre>
 
-  <h2>Requirements</h2>
+  <h2 id="requirements">Requirements <a class="hlink" href="#requirements" aria-label="Link to this section">#</a></h2>
   <p>Java 25 or higher. The release binaries are built with Eclipse Temurin 25.0.2+10; with <a href="https://sdkman.io/">SDKMAN</a>, <code>sdk env install</code> picks up the right version. On Debian and Ubuntu, packaging also needs:</p>
 <pre><code>sudo apt install -y rpm fakeroot binutils</code></pre>
   <p>Building the Windows installer additionally needs WiX.</p>
 
-  <h2>Build</h2>
+  <h2 id="build">Build <a class="hlink" href="#build" aria-label="Link to this section">#</a></h2>
 <pre><code>./gradlew jpackage</code></pre>
   <p>On distributions without <code>deb</code> or <code>rpm</code> tooling, such as Arch, skip the installers:</p>
 <pre><code>./gradlew jpackage -PskipInstallers=true</code></pre>
 
-  <h2>Running from source</h2>
+  <h2 id="running-from-source">Running from source <a class="hlink" href="#running-from-source" aria-label="Link to this section">#</a></h2>
   <p>From the project directory, with Java 25 or higher installed:</p>
 <pre><code>./sparrow</code></pre>
   <p>The convenience script in the source tree kept its upstream name, so it is <code>./sparrow</code> even here. The launcher inside a built or installed package is <code>shrike</code>.</p>
@@ -62,10 +62,10 @@
 --network, -n    mainnet, testnet, testnet4, regtest or signet</code></pre>
   <p>Note that <code>testnet</code> means testnet3.</p>
 
-  <h2>Home folder</h2>
+  <h2 id="home-folder">Home folder <a class="hlink" href="#home-folder" aria-label="Link to this section">#</a></h2>
   <p>Unless <code>-d</code> says otherwise, Shrike keeps its config, log and wallets in <code>~/.shrike</code> on macOS and Linux, with the other networks in subfolders. It is a separate location from Sparrow's, so the two installations never share state. On macOS and Linux the XDG base directory specification is supported as an opt-in, resolved per category: where the corresponding directory already exists it is used, otherwise the home folder is. Passing <code>-d</code> disables XDG resolution entirely and puts everything in the folder you name.</p>
 
-  <h2>Reproducible builds</h2>
+  <h2 id="reproducible-builds">Reproducible builds <a class="hlink" href="#reproducible-builds" aria-label="Link to this section">#</a></h2>
   <p>The release binaries are reproducible, before codesigning and installer packaging. The procedure is kept with the code, in <a href="https://github.com/privkeyio/shrike/blob/master/docs/reproducible.md">docs/reproducible.md</a>, along with the two regtest walkthroughs that verify the proof of work and the signature hash against a live forked node.</p>
 </div>
 </main>
