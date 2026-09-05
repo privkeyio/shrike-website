@@ -58,7 +58,7 @@
   <p>The fork carries temporary data storage limits alongside the proof-of-work change: roughly 300 kB serialized, about 800,000 weight units, from the activation height until 1 September 2027 at 00:00 UTC, after which nodes vote on them by median time past. Less space per block means more competition for it, so expect fee estimates to run higher than the pre-fork norm and size a transaction accordingly.</p>
 
   <h2>Why is only mempool.guide offered?</h2>
-  <p><a href="https://mempool.guide">mempool.guide</a> is the one fee, explorer and broadcast service that has adopted the fork. A fee estimate from a mempool you are not broadcasting into prices the transaction wrongly, and an explorer that stopped at the activation height shows a history that ends there, so the alternatives are removed rather than left in place to mislead.</p>
+  <p><a href="https://mempool.guide">mempool.guide</a> is the one fee, explorer and broadcast service still on the current chain. A fee estimate from a mempool you are not broadcasting into prices the transaction wrongly, and an explorer that stopped at the activation height shows a history that ends there, so the alternatives are removed rather than left in place to mislead.</p>
 
   <h2>Is a transaction replay protected if only one signer in my multisig is marked?</h2>
   <p>Only when that signer takes part. One marked signer in the quorum that actually forms is enough, which is why the wallet reports the result on the send screen per transaction instead of promising it in advance. Marking two of a 2-of-3 makes it unconditional.</p>
@@ -73,7 +73,7 @@
   <p>Problems specific to Shrike go to the <a href="https://github.com/privkeyio/shrike/issues">issue tracker here</a>. Anything that would also happen in Sparrow belongs <a href="https://github.com/sparrowwallet/sparrow/issues">upstream</a>. The log file in the configuration directory is usually where the useful detail is.</p>
 
   <h2>Who wrote this?</h2>
-  <p>The v2 block header, the BLAKE2b proof of work, the separate application identity and the packaging were written by <a href="https://github.com/AcesHigh70">AcesHigh70</a>, and are no longer maintained there. This fork continues that work and adds the unified opt-in signature hash. Sparrow itself is the work of the <a href="https://github.com/sparrowwallet/sparrow">Sparrow project</a>, which has not adopted the fork and is not affiliated with Shrike.</p>
+  <p>The v2 block header, the BLAKE2b proof of work, the separate application identity and the packaging were written by <a href="https://github.com/AcesHigh70">AcesHigh70</a>, and are no longer maintained there. This fork continues that work and adds the unified opt-in signature hash. Sparrow itself is the work of the <a href="https://github.com/sparrowwallet/sparrow">Sparrow project</a>, which has not added support for it and is not affiliated with Shrike.</p>
 </div>
 </main>
 <footer class="site-footer">

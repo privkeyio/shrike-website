@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Connect a Bitcoin Knots node or Electrum server | Shrike</title>
-<meta name="description" content="Connect Shrike to Bitcoin Knots v29.4.1.knots20260508 or later, or to your own Fulcrum server with BLAKE2b support. Bitcoin Core does not follow the fork.">
+<meta name="description" content="Connect Shrike to Bitcoin Knots v29.4.1.knots20260508 or later, or to your own Fulcrum server with BLAKE2b support. Bitcoin Core stayed on SHA256d.">
 <meta name="color-scheme" content="dark">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Shrike">
 <meta property="og:title" content="Connect a Bitcoin Knots node or Electrum server | Shrike">
-<meta property="og:description" content="Connect Shrike to Bitcoin Knots v29.4.1.knots20260508 or later, or to your own Fulcrum server with BLAKE2b support. Bitcoin Core does not follow the fork.">
+<meta property="og:description" content="Connect Shrike to Bitcoin Knots v29.4.1.knots20260508 or later, or to your own Fulcrum server with BLAKE2b support. Bitcoin Core stayed on SHA256d.">
 <link rel="icon" href="/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="/assets/css/main.css">
@@ -38,7 +38,7 @@
   <p>There are two ways to do that, both below: connect it straight to your own Bitcoin Knots node, or run your own Electrum server in front of that node. Either way the node has to be a recent enough Knots.</p>
   <div class="notice notice-accent">
     <span class="notice-title">Minimum node version</span>
-    <p>Shrike is meant to be used with <a href="https://github.com/bitcoinknots/bitcoin/releases/tag/v29.4.1.knots20260508">Bitcoin Knots v29.4.1.knots20260508</a> or any later release. Earlier releases do not follow the fork, and an Electrum server is only as good as the node behind it.</p>
+    <p>Shrike is meant to be used with <a href="https://github.com/bitcoinknots/bitcoin/releases/tag/v29.4.1.knots20260508">Bitcoin Knots v29.4.1.knots20260508</a> or any later release. Earlier releases stop at the activation height, and an Electrum server is only as good as the node behind it.</p>
   </div>
 
   <p>Bitcoin University has a <a href="https://youtu.be/7-5XszJcD6g" rel="noreferrer">video walkthrough of setting this up</a>, covering Start9 and Umbrel and installing Shrike against them. It is a community recording made before the current release.</p>
@@ -54,16 +54,16 @@
 
   <h2>Why the public servers are gone</h2>
   <p>A server that did not take the upgrade stops following the chain at the activation height and carries on under the pre-fork rules. Point Shrike at one and it reports a history that ends there, prices fees against a mempool you are not broadcasting into, and judges transactions by rules Shrike is not following. Rather than leave working-looking but wrong defaults in the settings, the fork removes them.</p>
-  <p>Fee rates, block explorer links and broadcast all go to <a href="https://mempool.guide">mempool.guide</a>, which has adopted the fork, and over Tor where a proxy is configured.</p>
+  <p>Fee rates, block explorer links and broadcast all go to <a href="https://mempool.guide">mempool.guide</a>, which is on the current chain, and over Tor where a proxy is configured.</p>
 
   <h2>Option 1: a Knots node</h2>
   <p>Connecting Shrike straight to a Bitcoin Knots node at v29.4.1.knots20260508 or later is the simplest arrangement, and the only one where the activation height gets cross checked: Knots reports it through <code>getdeploymentinfo</code>, and Shrike compares that against its compiled-in height. If the two disagree the wallet declines to opt in rather than choosing a side.</p>
   <p>In <strong>Settings &rarr; Server</strong>, choose the Bitcoin Core server type and point it at your node's RPC. Shrike will import and scan wallets through the node directly. The status bar turns green once it connects.</p>
-  <p><strong>The server type is named Bitcoin Core, but the node behind it has to be Knots.</strong> That label is inherited from upstream and describes the RPC interface, not the software you have to run. Bitcoin Core itself stays on SHA256d and does not follow the fork, so pointing Shrike at one gives you a node that stopped at the activation height.</p>
+  <p><strong>The server type is named Bitcoin Core, but the node behind it has to be Knots.</strong> That label is inherited from upstream and describes the RPC interface, not the software you have to run. Bitcoin Core stayed on SHA256d, so pointing Shrike at one gives you a node that stopped at the activation height.</p>
   <p>If your node was pruned before the fork it may stall rather than follow the new work, and recovering can mean redownloading the chain. Check that it is past the activation height and following BLAKE2b before relying on it.</p>
 
   <h2>Option 2: your own Electrum server</h2>
-  <p>An Electrum server indexing a node at v29.4.1.knots20260508 or later is the more private arrangement, and the faster one: scanning a large wallet through a node directly is slow, and an index makes it quick. It has to be your own, or one you know follows the fork. Configure it under <strong>Settings &rarr; Server</strong> as a private Electrum server, and the status bar turns blue once it connects.</p>
+  <p>An Electrum server indexing a node at v29.4.1.knots20260508 or later is the more private arrangement, and the faster one: scanning a large wallet through a node directly is slow, and an index makes it quick. It has to be your own, or one you know is current. Configure it under <strong>Settings &rarr; Server</strong> as a private Electrum server, and the status bar turns blue once it connects.</p>
   <p><strong>Stock Fulcrum will not do.</strong> It validates SHA256d headers, so it stops at the activation height like any other unmodified software. Builds with BLAKE2b support are published here:</p>
   <ul>
     <li><a href="https://github.com/privkeyio/Fulcrum/releases/latest">Fulcrum with BLAKE2b support</a>, for a server you run yourself</li>

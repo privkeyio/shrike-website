@@ -102,7 +102,7 @@
   <p>What that means in practice depends on how many you mark. Mark two of a 2-of-3 and every transaction opts in, because any quorum that forms contains at least one of them. Mark one and it depends on that signer taking part, which is why the wallet reports the result per transaction on the send screen instead of promising anything in advance.</p>
 
   <h2 id="acp">The Anyone Can Pay exception</h2>
-  <p>Anyone Can Pay commits only to its own input and to the outputs. The rest of the transaction is not covered, so that single input can be lifted out of it and spent against nodes that never adopted the fork, even though the transaction as a whole cannot be replayed. The send screen names signatures of this kind, and Shrike never selects the mode by itself.</p>
+  <p>Anyone Can Pay commits only to its own input and to the outputs. The rest of the transaction is not covered, so that single input can be lifted out of it and spent against nodes still on the old rules, even though the transaction as a whole cannot be replayed. The send screen names signatures of this kind, and Shrike never selects the mode by itself.</p>
 
   <h2 id="demo">Community walkthroughs</h2>
   <p>Bitcoin University has a <a href="https://youtu.be/7-5XszJcD6g" rel="noreferrer">walkthrough of installing Shrike and connecting it to a node</a>, covering Start9 and Umbrel.</p>

@@ -56,7 +56,7 @@
       <li>Full PSBT import and export, and a transaction editor that shows the bytes before you broadcast</li>
       <li>Replay protection marked per keystore, with the send screen reporting what each transaction actually got</li>
       <li>Connects to your own node: Bitcoin Knots directly, or your own Electrum server indexing one</li>
-      <li>Tor built in, and fee rates, broadcast and explorer links pointed only at services that follow the fork</li>
+      <li>Tor built in, and fee rates, broadcast and explorer links pointed only at services that kept up</li>
       <li>Installs alongside an existing Sparrow without sharing wallets, settings or state</li>
       <li>Reproducible release binaries, with the proof of work and the signature hash checked against a live forked regtest node</li>
       <li>mainnet, testnet, testnet4, regtest and signet</li>
@@ -82,8 +82,8 @@
         <p class="muted">Nothing a hardware device or watch-only keystore reports tells the wallet what firmware will sign for it, so you mark each one by hand. One marked signer in a quorum is enough.</p>
       </div>
       <div class="card">
-        <h3>Only adopting services</h3>
-        <p class="muted">Fee rates, explorer links and broadcast go to <a href="https://mempool.guide">mempool.guide</a>. The preconfigured public Electrum servers are gone, because none of them follow the fork.</p>
+        <h3>Only services that kept up</h3>
+        <p class="muted">Fee rates, explorer links and broadcast go to <a href="https://mempool.guide">mempool.guide</a>. The preconfigured public Electrum servers are gone, because they stopped at the activation height.</p>
       </div>
       <div class="card">
         <h3>Separate application identity</h3>
