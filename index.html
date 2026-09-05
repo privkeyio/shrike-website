@@ -35,7 +35,7 @@
     <div>
     <h1>Shrike Bitcoin Wallet</h1>
     <p class="lede">A full desktop Bitcoin wallet: hardware wallets, PSBT, multisig and airgapped signing, connecting to your own node. Shrike follows the <strong>BLAKE2b proof-of-work hardfork</strong> of Bitcoin.</p>
-    <p class="lede">It signs with <code>SIGHASH_UNIFIED</code>, so the transactions it builds cannot be replayed against nodes still running the pre-fork rules.</p>
+    <p class="lede">It signs with <code>SIGHASH_UNIFIED</code>, so the transactions it builds cannot be replayed onto the SHA256d chain.</p>
     <div class="btn-row">
       <a class="btn" href="/download/">Download</a>
       <a class="btn btn-ghost" href="/docs/replay-protection.html">Replay protection</a>
@@ -118,12 +118,12 @@
 <section>
   <div class="wrap">
     <h2 id="check-the-send-screen">Check the send screen <a class="hlink" href="#check-the-send-screen" aria-label="Link to this section">#</a></h2>
-    <p class="section-lede">A signature that does not opt in is valid under both rule sets, so it can be replayed. Shrike selects the opt-in by default and says plainly what each transaction got.</p>
+    <p class="section-lede">A signature that does not opt in is valid under both rule sets. Where the coins it spends also exist on the SHA256d chain, that makes the transaction replayable there. Shrike selects the opt-in by default and says plainly what each transaction got.</p>
     <figure>
       <img src="/assets/images/send-replay-protected.png" alt="The send screen reporting a transaction as replay protected">
       <figcaption>Where the status reads otherwise, hovering it names what is refusing and what to do about it.</figcaption>
     </figure>
-    <p><strong>Anyone Can Pay is the exception.</strong> It commits only to its own input and the outputs, so that input can be lifted out and spent under the pre-fork rules even though the whole transaction cannot. Shrike names such signatures and never selects that mode on its own.</p>
+    <p><strong>Anyone Can Pay is the exception.</strong> It commits only to its own input and the outputs, so that input can be lifted out and spent on the SHA256d chain even though the whole transaction cannot. Shrike names such signatures and never selects that mode on its own.</p>
     <p><a href="/docs/replay-protection.html">Read the full replay protection guide &rarr;</a></p>
   </div>
 </section>

@@ -65,7 +65,7 @@
       </tbody>
     </table>
   </div>
-  <p>None of those are valid under the pre-fork consensus rules, so a node running them rejects the signature outright. Nothing has to cooperate for this to hold: the protection is the old rules refusing the signature, not a policy anyone has to honor.</p>
+  <p>None of those are valid under the pre-fork consensus rules, so a node running them rejects the signature outright. Nothing has to cooperate for this to hold: the protection is the pre-fork rules refusing the signature, not a policy anyone has to honor.</p>
   <div class="table-scroll">
     <table>
       <thead><tr><th>Network</th><th>Activation height</th><th>Activated</th></tr></thead>
@@ -102,7 +102,7 @@
   <p>What that means in practice depends on how many you mark. Mark two of a 2-of-3 and every transaction opts in, because any quorum that forms contains at least one of them. Mark one and it depends on that signer taking part, which is why the wallet reports the result per transaction on the send screen instead of promising anything in advance.</p>
 
   <h2 id="acp">The Anyone Can Pay exception <a class="hlink" href="#acp" aria-label="Link to this section">#</a></h2>
-  <p>Anyone Can Pay commits only to its own input and to the outputs. The rest of the transaction is not covered, so that single input can be lifted out of it and spent against nodes still on the old rules, even though the transaction as a whole cannot be replayed. The send screen names signatures of this kind, and Shrike never selects the mode by itself.</p>
+  <p>Anyone Can Pay commits only to its own input and to the outputs. The rest of the transaction is not covered, so that single input can be lifted out of it and spent on the SHA256d chain, even though the transaction as a whole cannot be replayed. The send screen names signatures of this kind, and Shrike never selects the mode by itself.</p>
 
   <h2 id="demo">Community walkthroughs <a class="hlink" href="#demo" aria-label="Link to this section">#</a></h2>
   <p>Bitcoin University has a <a href="https://youtu.be/7-5XszJcD6g" rel="noreferrer">walkthrough of installing Shrike and connecting it to a node</a>, covering Start9 and Umbrel.</p>
@@ -111,7 +111,7 @@
 
   <h2 id="sweep">Coins held across activation <a class="hlink" href="#sweep" aria-label="Link to this section">#</a></h2>
   <p>Coins that existed before activation are the same coins either way: the fork does not duplicate them or issue anything new. What it does mean is that a spend of them is only bound to the upgraded rules once it carries an opted-in signature, and a spend covers only the inputs it consumes.</p>
-  <p>So sweep every pre-fork UTXO to yourself before transacting with anyone still on the old rules. Until you do, a transaction spending those coins stays valid under the pre-fork rules as well, and anyone holding a copy of it can submit it there.</p>
+  <p>So sweep every pre-fork UTXO to yourself before transacting with anyone on the SHA256d chain. Until you do, a transaction spending those coins stays valid under the pre-fork rules as well, and anyone holding a copy of it can submit it there.</p>
 </div>
 </main>
 <footer class="site-footer">
