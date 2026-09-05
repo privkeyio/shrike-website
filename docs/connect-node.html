@@ -58,12 +58,12 @@
 
   <h2 id="option-1-a-knots-node">Option 1: a Knots node <a class="hlink" href="#option-1-a-knots-node" aria-label="Link to this section">#</a></h2>
   <p>Connecting Shrike straight to a Bitcoin Knots node at v29.4.1.knots20260508 or later is the simplest arrangement, and the only one where the activation height gets cross checked: Knots reports it through <code>getdeploymentinfo</code>, and Shrike compares that against its compiled-in height. If the two disagree the wallet declines to opt in rather than choosing a side.</p>
-  <p>In <strong>Settings &rarr; Server</strong>, choose <strong>Bitcoin Knots</strong> and point it at your node's RPC. Shrike will import and scan wallets through the node directly. The status bar turns green once it connects.</p>
+  <p>In <strong>Settings &rarr; Server</strong>, choose <strong>Bitcoin Knots</strong> and point it at your node's RPC. Shrike will import and scan wallets through the node directly. The server toggle in the status bar turns green once it connects.</p>
   <p>It has to be Knots. Bitcoin Core stayed on SHA256d, so pointing Shrike at one gives you a node that stopped at the activation height.</p>
   <p>If your node was pruned before the fork it may stall rather than follow the new work, and recovering can mean redownloading the chain. Check that it is past the activation height and following BLAKE2b before relying on it.</p>
 
   <h2 id="option-2-your-own-electrum-server">Option 2: your own Electrum server <a class="hlink" href="#option-2-your-own-electrum-server" aria-label="Link to this section">#</a></h2>
-  <p>An Electrum server indexing a node at v29.4.1.knots20260508 or later is the more private arrangement, and the faster one: scanning a large wallet through a node directly is slow, and an index makes it quick. It has to be your own, or one you know is current. Configure it under <strong>Settings &rarr; Server</strong> as a private Electrum server, and the status bar turns blue once it connects.</p>
+  <p>An Electrum server indexing a node at v29.4.1.knots20260508 or later is the more private arrangement, and the faster one: scanning a large wallet through a node directly is slow, and an index makes it quick. It has to be your own, or one you know is current. Configure it under <strong>Settings &rarr; Server</strong> as a private Electrum server, and the server toggle turns blue once it connects.</p>
   <p><strong>Stock Fulcrum will not do.</strong> It validates SHA256d headers, so it stops at the activation height like any other unmodified software. Builds with BLAKE2b support are published here:</p>
   <ul>
     <li><a href="https://github.com/privkeyio/Fulcrum/releases/latest">Fulcrum with BLAKE2b support</a>, for a server you run yourself</li>
