@@ -43,6 +43,9 @@
 
   <h2 id="unified-opt-in-signature-hash">Unified opt-in signature hash <a class="hlink" href="#unified-opt-in-signature-hash" aria-label="Link to this section">#</a></h2>
   <p>Past activation, Shrike signs with <code>SIGHASH_UNIFIED</code>. It is a flag, <code>0x20</code>, set on whatever base hash type the signature already uses: <code>0x21</code> for the default All, <code>0x22</code> for None, <code>0x23</code> for Single, and <code>0xA1</code> to <code>0xA3</code> for the Anyone Can Pay combinations. Under the pre-fork rules none of those are valid, so a signature carrying the flag cannot be replayed onto the SHA256d chain. This is the whole mechanism: the protection comes from the pre-fork rules rejecting the signature, not from anything the wallet asks the network to enforce.</p>
+  <p>Opting in does more than change the message. The new hash commits to the amount every input spends, and that is what the change is actually for: it closes CVE-2013-2292 and CVE-2020-14199 for the inputs that opt in. Sign the legacy way and a hardware wallet is shown the amounts by the computer it is plugged into rather than committing to them itself, which is how a signer can be talked into paying a fee it never agreed to.</p>
+  <p>Replay resistance follows from that. Because the message is different, the pre-fork rules reject the signature, so a transaction carrying it cannot be replayed. It is a consequence of the new hash rather than the reason for it.</p>
+
   <p>Where Shrike cannot opt in, it signs the legacy way and says so on the send screen rather than failing or pretending.</p>
 
   <h2 id="per-keystore-opt-in">Per-keystore opt-in <a class="hlink" href="#per-keystore-opt-in" aria-label="Link to this section">#</a></h2>

@@ -77,6 +77,8 @@
   </div>
   <p>The compiled-in height is cross checked against the connected node wherever the node reports one, and a disagreement makes Shrike decline to opt in rather than follow either number. Only Knots reports it, through <code>getdeploymentinfo</code>. Behind anything else the wallet still opts in, and tells you the height went unchecked.</p>
 
+  <p>Worth knowing what the opt-in is really for. The new hash commits to the amount every input spends, closing CVE-2013-2292 and CVE-2020-14199 for those inputs. That is the purpose; replay resistance is a side effect of the message being different, which is also why not opting in does not by itself make a transaction replayable.</p>
+
   <h2 id="send">Reading the send screen <a class="hlink" href="#send" aria-label="Link to this section">#</a></h2>
   <p>The opt-in is selected by default, and the send screen reports what the transaction actually got. Check it before you build anything.</p>
   <figure>
