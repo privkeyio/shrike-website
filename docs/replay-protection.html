@@ -91,6 +91,13 @@
   </figure>
   <p>Where a signer is the reason, the fix is to mark it, below. Where the wallet cannot opt in at all, it signs the legacy way rather than failing, and says so.</p>
 
+  <p>Opening the transaction afterwards answers a different question. The send screen tells you what the wallet is about to build. The transaction tab looks at the signatures that are actually on it, so it answers in two steps. Before anyone has signed there is nothing to look at yet, so it tells you what the transaction will be.</p>
+  <figure>
+    <img src="/assets/images/will-be-replay-protected.png" alt="The transaction tab reporting that a transaction will be replay protected once signed">
+    <figcaption>Before signing. A question mark means not checked yet, not unprotected.</figcaption>
+  </figure>
+  <p>After signing, the wallet checks each signature against its own keys and tells you what the transaction is. Until it can check for itself it will not say either way, because a transaction file can claim anything about itself: open one without its wallet, or with signatures this wallet cannot read, and it stays unchecked rather than guessed at.</p>
+
   <h2 id="keystore">Marking a keystore <a class="hlink" href="#keystore" aria-label="Link to this section">#</a></h2>
   <p>Nothing a hardware device reports says which firmware it runs, and a watch-only keystore reports nothing about signing at all. So the wallet cannot detect the opt-in: you tell it. Open the wallet settings, go to the keystore tab, and tick <strong>Replay protection</strong> for each keystore whose signer you know produces the new hash type. It is off until you say so.</p>
   <figure>
