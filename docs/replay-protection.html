@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Replay protection and SIGHASH_UNIFIED | Shrike</title>
-<meta name="description" content="How SIGHASH_UNIFIED prevents replay on the BLAKE2b hardfork: the 0x20 flag, marking a keystore, multisig quorums, and the Anyone Can Pay exception.">
+<meta name="description" content="How SIGHASH_UNIFIED prevents replay after Bitcoin's change to BLAKE2b: the 0x20 flag, marking a keystore, multisig quorums, and the Anyone Can Pay exception.">
 <meta name="color-scheme" content="dark">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Shrike">
 <meta property="og:title" content="Replay protection and SIGHASH_UNIFIED | Shrike">
-<meta property="og:description" content="How SIGHASH_UNIFIED prevents replay on the BLAKE2b hardfork: the 0x20 flag, marking a keystore, multisig quorums, and the Anyone Can Pay exception.">
+<meta property="og:description" content="How SIGHASH_UNIFIED prevents replay after Bitcoin's change to BLAKE2b: the 0x20 flag, marking a keystore, multisig quorums, and the Anyone Can Pay exception.">
 <link rel="icon" href="/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="/assets/css/main.css">
@@ -52,7 +52,7 @@
   </div>
 
   <h2 id="how">How the opt-in works <a class="hlink" href="#how" aria-label="Link to this section">#</a></h2>
-  <p>Replay is the one thing a hardfork of Bitcoin has to handle carefully. The chain, the coins and the history are unchanged; what changes at the activation height is the proof of work and the signature hash, and until your coins have moved under the new rules a transaction you sign can be valid on both sides of that height.</p>
+  <p>Replay is the one thing a change of this kind has to handle carefully. The chain, the coins and the history are unchanged; what changes at the activation height is the proof of work and the signature hash, and until your coins have moved under the new rules a transaction you sign can be valid on both sides of that height.</p>
   <p>Past the activation height Shrike signs with <code>SIGHASH_UNIFIED</code>, the name the fork uses for this opt-in. It is not a hash type of its own but a flag, <code>0x20</code>, set on the base type a signature already carries:</p>
   <div class="table-scroll">
     <table>
