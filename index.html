@@ -52,14 +52,13 @@
     <p class="section-lede">Shrike builds on Sparrow, so the wallet itself is a mature one.</p>
     <ul>
       <li>Single signature and multisig wallets across the common script types</li>
-      <li>Hardware wallets over USB and in airgapped modes, with firmware available for Coldcard, SeedSigner and every current Trezor</li>
+      <li>Hardware wallets over USB and in airgapped modes</li>
       <li>Full PSBT import and export, and a transaction editor that shows the bytes before you broadcast</li>
       <li>Replay protection marked per keystore, with the send screen reporting what each transaction actually got</li>
       <li>Connects to your own node: Bitcoin Knots directly, or your own Electrum server indexing one</li>
       <li>Tor built in, and fee rates, broadcast and explorer links pointed only at services that kept up</li>
       <li>Installs alongside an existing Sparrow without sharing wallets, settings or state</li>
       <li>Reproducible release binaries, with the proof of work and the signature hash checked against a live forked regtest node</li>
-      <li>mainnet, testnet, testnet4, regtest and signet</li>
     </ul>
   </div>
 </section>
@@ -71,15 +70,15 @@
     <div class="grid">
       <div class="card">
         <h3 id="blake2b-proof-of-work">BLAKE2b proof of work <a class="hlink" href="#blake2b-proof-of-work" aria-label="Link to this section">#</a></h3>
-        <p class="muted">Validates the 164 byte v2 block header and takes the BLAKE2b hash as the block id past activation. The work itself lives in the drongo submodule.</p>
+        <p class="muted">Validates the 164 byte v2 block header and takes the BLAKE2b hash as the block id past activation. The work itself lives in the <a href="https://github.com/privkeyio/drongo">drongo</a> submodule.</p>
       </div>
       <div class="card">
         <h3 id="unified-opt-in-signature-hash">Unified opt-in signature hash <a class="hlink" href="#unified-opt-in-signature-hash" aria-label="Link to this section">#</a></h3>
-        <p class="muted">Past activation, signs with <code>SIGHASH_UNIFIED</code>: the <code>0x20</code> flag set on the base hash type, <code>0x21</code> by default. The pre-fork rules reject that hash type, which is exactly what makes the signature unreplayable.</p>
+        <p class="muted">Past activation, signs with <code>SIGHASH_UNIFIED</code>: the <code>0x20</code> flag set on the base hash type, <code>0x21</code> by default. The pre-fork rules reject that hash type, which is what the protection rests on.</p>
       </div>
       <div class="card">
         <h3 id="per-keystore-opt-in">Per-keystore opt-in <a class="hlink" href="#per-keystore-opt-in" aria-label="Link to this section">#</a></h3>
-        <p class="muted">Nothing a hardware device or watch-only keystore reports tells the wallet what firmware will sign for it, so you mark each one by hand. One marked signer in a quorum is enough.</p>
+        <p class="muted">Nothing a hardware device or watch-only keystore reports tells the wallet what firmware will sign for it, so you mark each one by hand. One marked signer in a quorum is enough. The device side lives in the <a href="https://github.com/privkeyio/lark">lark</a> submodule.</p>
       </div>
       <div class="card">
         <h3 id="only-services-that-kept-up">Only services that kept up <a class="hlink" href="#only-services-that-kept-up" aria-label="Link to this section">#</a></h3>
@@ -132,9 +131,9 @@
   <div class="wrap">
     <h2 id="get-started">Get started <a class="hlink" href="#get-started" aria-label="Link to this section">#</a></h2>
     <div class="grid">
-      <a class="card" href="/download/"><h3 id="download">Download</h3><p class="muted">Packages for Linux, macOS and Windows, with a signed <code>SHA256SUMS</code> covering every file.</p></a>
+      <a class="card" href="/docs/quick-start.html"><h3 id="quick-start">Quick start</h3><p class="muted">The whole path: get a node running, connect it, mark your signers, check the send screen.</p></a>
+    <a class="card" href="/download/"><h3 id="download">Download</h3><p class="muted">Packages for Linux, macOS and Windows, with a signed <code>SHA256SUMS</code> covering every file.</p></a>
       <a class="card" href="/docs/connect-node.html"><h3 id="connect-a-node">Connect a node</h3><p class="muted">Point Shrike at Bitcoin Knots v29.4.1.knots20260508 or later, or your own Electrum server indexing one.</p></a>
-      <a class="card" href="/docs/building.html"><h3 id="build-from-source">Build from source</h3><p class="muted">Clone recursively, build with Gradle, or reproduce the published binaries.</p></a>
     </div>
   </div>
 </section>
