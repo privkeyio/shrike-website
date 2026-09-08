@@ -75,6 +75,7 @@
 
   <h2 id="networks">Networks <a class="hlink" href="#networks" aria-label="Link to this section">#</a></h2>
   <p>Shrike runs on mainnet, testnet, testnet4, regtest and signet. Select one at launch:</p>
+  <p>Only mainnet and testnet4 have the BLAKE2b change scheduled. On testnet3 and signet the wallet runs as it always did, and on regtest the node picks its own activation height.</p>
 <pre><code>./sparrow --network testnet4</code></pre>
   <p>The environment variable <code>SPARROW_NETWORK</code> is honored as a fallback, and is still spelled that way because the fork did not rename it. Whichever you use, the server you connect to has to be running on the same network.</p>
   <p>Configuration and wallets for the non-mainnet networks are kept in subfolders of the home folder, so switching networks does not disturb a mainnet setup.</p>
