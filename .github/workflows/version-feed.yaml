@@ -9,6 +9,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   update:
@@ -28,17 +29,31 @@ jobs:
           fi
           echo "version=$version" >> "$GITHUB_OUTPUT"
 
-      - name: Write the feed if it changed
+      # main requires changes to arrive by pull request, so this opens one and merges it rather than pushing.
+      # Pushing directly fails the rule, and it fails on the push, which only ever runs when there is something
+      # to publish: the workflow would keep reporting success while the feed silently stopped being updated.
+      - name: Publish the feed if it changed
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ steps.release.outputs.version }}
         run: |
-          printf '{\n  "version": "%s"\n}\n' "${{ steps.release.outputs.version }}" > version.new
+          printf '{\n  "version": "%s"\n}\n' "$VERSION" > version.new
           if cmp -s version.new version; then
             rm version.new
-            echo "Feed already at ${{ steps.release.outputs.version }}"
+            echo "Feed already at $VERSION"
             exit 0
           fi
+
           mv version.new version
+          branch="version-feed/$VERSION"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$branch"
           git add version
-          git commit -m "Publish ${{ steps.release.outputs.version }} to the version feed"
-          git push
+          git commit -m "Publish $VERSION to the version feed"
+          git push origin "$branch"
+
+          gh pr create --base main --head "$branch" \
+            --title "Publish $VERSION to the version feed" \
+            --body "Generated from the latest Shrike release. The wallet polls /version to tell users a newer release exists."
+          gh pr merge "$branch" --squash --delete-branch
