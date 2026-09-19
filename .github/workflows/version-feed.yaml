@@ -1,0 +1,44 @@
+name: Version feed
+
+# The wallet polls /version to tell users a newer release exists. Generated from the release itself rather than
+# maintained by hand: a feed that silently stops being updated tells every user they are current forever.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '23 5 * * *'
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Read the latest Shrike release
+        id: release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          version=$(gh api repos/privkeyio/shrike/releases/latest -q .tag_name | sed 's/^v//')
+          if [ -z "$version" ]; then
+            echo "No release tag returned" >&2
+            exit 1
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - name: Write the feed if it changed
+        run: |
+          printf '{\n  "version": "%s"\n}\n' "${{ steps.release.outputs.version }}" > version.new
+          if cmp -s version.new version; then
+            rm version.new
+            echo "Feed already at ${{ steps.release.outputs.version }}"
+            exit 0
+          fi
+          mv version.new version
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add version
+          git commit -m "Publish ${{ steps.release.outputs.version }} to the version feed"
+          git push
