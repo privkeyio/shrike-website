@@ -77,7 +77,7 @@
 <pre><code>gpg --import privkeyio-signing-key.asc
 gpg --verify SHA256SUMS.asc SHA256SUMS
 sha256sum --ignore-missing -c SHA256SUMS</code></pre>
-  <p>Fingerprint <code>A47D 99B6 DB0D 715D 40C5  9A20 23AE 8A8E A7E2 4E38</code>, Kyle Santiago &lt;kyle@privkey.io&gt;. A signature that does not verify means you do not flash it.</p>
+  <p>The <code>Primary key fingerprint</code> line must read <code>A47D 99B6 DB0D 715D 40C5  9A20 23AE 8A8E A7E2 4E38</code>, Kyle Santiago &lt;kyle@privkey.io&gt;. The <code>using RSA key</code> line shows the signing subkey <code>1004 97C5 8727 107D 9B9D  A0FA F160 CC14 F64F 8EF8</code> instead, which is expected. A signature that does not verify means you do not flash it. See <a href="/download/#verify-the-download">verifying a download</a> for what the full output looks like.</p>
 
   <h2 id="after-flashing">After flashing <a class="hlink" href="#after-flashing" aria-label="Link to this section">#</a></h2>
   <p>Nothing the device reports tells Shrike what firmware it is running, so the wallet still will not detect the change. Mark the keystore yourself in the wallet settings, then check the send screen on the next transaction to confirm it actually opted in. See <a href="/docs/replay-protection.html">replay protection</a> for what the marks mean in a multisig quorum.</p>
